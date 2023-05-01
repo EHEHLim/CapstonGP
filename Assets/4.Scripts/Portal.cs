@@ -25,14 +25,14 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
                 StartCoroutine(SceneChange());
                 Debug.Log("onPortal");
