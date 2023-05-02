@@ -56,6 +56,14 @@ public class PlayerCtl : MonoBehaviour
             }
             anim.SetTrigger("Attack");
         }
+        if (Input.GetKey(KeyCode.C))
+        {
+            if(coll.gameObject.tag == "Monster")
+            {
+                coll.GetComponent<MonsterCtl>().Damage(1);
+            }
+            anim.SetTrigger("Attack4");
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Space))
