@@ -22,6 +22,10 @@ public class Anim : MonoBehaviour
         {
             anim.SetTrigger("Attack");
         }
+        if (Input.GetKey(KeyCode.C))
+        {
+            anim.SetTrigger("Attack4");
+        }
 
         // Move animation
         if (Input.GetAxisRaw("Horizontal") != 0)
