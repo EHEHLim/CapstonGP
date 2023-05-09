@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance = null;
     public bool isSceneChanging = false;
     public GameObject player;
-
+    public bool isStoryProcessing = false;
     private void Awake()
     {
         if(instance == null)
