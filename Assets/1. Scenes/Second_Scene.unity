@@ -607,7 +607,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583944643}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17, y: 9, z: 0}
+  m_LocalPosition: {x: 17, y: 2, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -832,11 +832,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 31582432991486666, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.4579954
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 31582432991486666, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.9
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 31582432991486666, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: m_LocalPosition.z
@@ -872,11 +872,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3208424030323977845, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: x
-      value: 104
+      value: 98
       objectReference: {fileID: 0}
     - target: {fileID: 3208424030323977845, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: y
-      value: 1.5
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 3208424030323977845, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: panel
@@ -906,7 +906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1364007038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,7 +1026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385908199}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 4.5, z: 0}
+  m_LocalPosition: {x: -2, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1186,7 +1186,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5181653794703246222, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
-  maxX: 97
+  maxX: 93
 --- !u!1 &1744270276
 GameObject:
   m_ObjectHideFlags: 0
