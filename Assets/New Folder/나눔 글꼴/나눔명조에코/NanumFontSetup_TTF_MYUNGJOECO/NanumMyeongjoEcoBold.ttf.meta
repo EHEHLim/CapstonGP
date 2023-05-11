@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 7e580a432d48c477b8c61392f03790ab
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - NanumMyeongjo Eco
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: aa6676cf364fd417db1c47c801c0a87f, type: 3}
+  - {fileID: 12800000, guid: ca81cce4311054e2485cb6215511ea1d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

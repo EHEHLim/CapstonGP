@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: a6d1829658cf74ceb8aac7e97e7722d8
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - NanumMyeongjoOTF Eco
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 741711ebd278f4c4aa2b907c3b562412, type: 3}
+  - {fileID: 12800000, guid: a551395353f9440eb8e6e957c82311a1, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
