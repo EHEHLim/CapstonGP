@@ -17,11 +17,7 @@ public class TutorialStory : MonoBehaviour
     private void Awake()
     {
         m_text_1 = new string[]{
-            "대화창 1",
-            "대화창 2",
-            "대화창 3",
-            "대화창 4",
-            "대화창 5"
+            "대화창 1"
         };
 
         //초기화
@@ -59,7 +55,7 @@ public class TutorialStory : MonoBehaviour
         txt.gameObject.SetActive(false);
         //스토리 종료
         StartCoroutine(FadeOut(panel));
-
+        panel.gameObject.SetActive(false);
         yield return new WaitUntil(() => isFading == false);
         GameManager.Instance.isStoryProcessing = false;
     }
