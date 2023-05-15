@@ -62,7 +62,8 @@ public class PlayerCtl : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.C))
         {
-            if(coll.gameObject.tag == "Monster")
+            Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
+            if (coll.gameObject.tag == "Monster")
             {
                 coll.GetComponent<MonsterCtl>().Damage(1);
             }
