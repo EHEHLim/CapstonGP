@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5181653794703246217}
   - component: {fileID: 5181653794703246223}
   - component: {fileID: 5181653794703246324}
-  - component: {fileID: 3487251044396913711}
+  - component: {fileID: 3775957091590184357}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -178,7 +178,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &3487251044396913711
+--- !u!70 &3775957091590184357
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -17,15 +17,16 @@ public class TutorialStory : MonoBehaviour
     private void Awake()
     {
         m_text_1 = new string[]{
-            "대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1대화창 1",
-            "대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 대화창 2 ",
-            "대화창 3 대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3대화창 3"
+            "대화창 1",
+            "대화창 2",
+            "대화창 3",
+            "대화창 4"
         };
 
         //초기화
         txt.gameObject.SetActive(false);
         arrow.gameObject.SetActive(false);
-        //시/
+        //시
         StartCoroutine(Tutorial_1());
     }
 
@@ -40,7 +41,7 @@ public class TutorialStory : MonoBehaviour
         //Fading이 끝나고 text창 (대화창)을 열어야 하므로,
         //isFading이 false로 변할때까지 대기하다가 변하면 다음 문장 실행
         //(() => bool값 or bool값 반환 함수 or 조건문) WaitUntil함수는 매개변수로 함수가 들어가야함
-        //isFading이라는 bool값 변수를 함수처럼 사용하기 위/
+        //isFading이라는 bool값 변수를 함수처럼 사용하기 위하
         yield return new WaitUntil(() => isFading == false);
 
         //text창을 보이게 함
@@ -75,7 +76,7 @@ public class TutorialStory : MonoBehaviour
         for (int i = 0; i < str.Length; i++)
         {
             txt.text = str.Substring(0, i);                 // str문자열의 0번쨰 부터 i번째까지의 문자열을 txt.text에 반영 (대사창)
-            yield return new WaitForSeconds(typingSpeed);   // 글자 출력 후 0.05초 기다0
+            yield return new WaitForSeconds(typingSpeed);   // 글자 출력 후 0.05초 기다
         }
         isTyping = false; //typing 끝
     }
@@ -88,8 +89,8 @@ public class TutorialStory : MonoBehaviour
         isFading = true;
         while(pn.color.a < 0.6) //pnael의 투명도가 0.6을 넘지 않도록 조건문 설정 (0~1 백분율)
         {
-            pn.color += new Color(0, 0, 0, 0.02f);  //투명도 비율을 0.02씩 증가시/
-            yield return new WaitForSeconds(0.01f); //0.01초 대
+            pn.color += new Color(0, 0, 0, 0.02f);  //투명도 비율을 0.02씩 증가시
+            yield return new WaitForSeconds(0.01f); //0.01초 대
         }
         //Fading 끝
         isFading = false;
@@ -101,7 +102,7 @@ public class TutorialStory : MonoBehaviour
         isFading = true; //Fading 시작
         while(pn.color.a > 0f)
         {
-            pn.color -= new Color(0, 0, 0, 0.02f);  //panel의 투명도를 0.02씩 낮/
+            pn.color -= new Color(0, 0, 0, 0.02f);  //panel의 투명도를 0.02씩 낮
             yield return new WaitForSeconds(0.01f); //0.01초 대기
         }
         isFading = false; //Fading 끝

@@ -12,10 +12,10 @@ public class PlayerCtl : MonoBehaviour
 
     public float moveSpeed;
     public float jumpPower;
-    bool isJumping = false;
-    bool canDoubleJump = true;
     public Transform pos;
     public Vector2 boxSize;
+    private bool isGrounded = true;
+    private bool canDoubleJump = false;
 
     private int direction = -1;
     private bool isDash = false;
@@ -23,6 +23,8 @@ public class PlayerCtl : MonoBehaviour
     private float dashingTime = 0.15f;
     private float dashingPower = 10f;
     private float dashingCoolDown = 1f;
+
+    private bool isContactingSomething = false;
 
     private float horizontal;
 
@@ -33,10 +35,6 @@ public class PlayerCtl : MonoBehaviour
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
         coll = GetComponent<Collider2D>();
-    }
-    void Start()
-    {
-        
     }
 
     void Update()
@@ -49,6 +47,7 @@ public class PlayerCtl : MonoBehaviour
         {
             return;
         }
+
         if (Input.GetKey(KeyCode.Z))
         {
             Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
@@ -73,20 +72,17 @@ public class PlayerCtl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(isJumping == false && !anim.GetBool("isJump"))
+            if(isGrounded == true || canDoubleJump)
             {
-                isJumping = true;
-                rigid2D.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                anim.SetBool("isJump", true);
-                canDoubleJump = true;
-            }
-            else
-            {
-                if (canDoubleJump)
+                rigid2D.velocity = Vector2.up * jumpPower;
+                isGrounded = false;
+                if (isGrounded)
+                {
+                    isGrounded = false;
+                }
+                else
                 {
                     canDoubleJump = false;
-                    rigid2D.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-
                 }
             }
             
@@ -135,21 +131,27 @@ public class PlayerCtl : MonoBehaviour
         {
             return;
         }
+        if(isContactingSomething && !isGrounded)
+        {
+            return;
+        }
         rigid2D.velocity = new Vector2(horizontal * moveSpeed, rigid2D.velocity.y);
     }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         
             Gizmos.DrawWireCube(pos.position, boxSize);
     }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if(col.collider.CompareTag("GROUND"))
         {
-            isJumping = false;
-            canDoubleJump = false;
+            canDoubleJump = true;
             anim.SetBool("isJump", false);
+            isGrounded = true;
         }
     }
 
