@@ -20,7 +20,8 @@ public class TutorialStory : MonoBehaviour
             "대화창 1",
             "대화창 2",
             "대화창 3",
-            "대화창 4"
+            "대화창 4",
+            "대화창 5"
         };
 
         //초기화
