@@ -76,6 +76,7 @@ public class PlayerCtl : MonoBehaviour
             {
                 rigid2D.velocity = Vector2.up * jumpPower;
                 isGrounded = false;
+                anim.SetBool("isJump", true);
                 if (isGrounded)
                 {
                     isGrounded = false;
