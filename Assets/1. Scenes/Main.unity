@@ -481,6 +481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSceneChanging: 0
   player: {fileID: 1200894512}
+  isStoryProcessing: 0
 --- !u!1 &1450094263
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +803,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7953514156452714550, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
 --- !u!4 &1579899855 stripped
 Transform:
