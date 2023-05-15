@@ -25,6 +25,7 @@ public class PlayerCtl : MonoBehaviour
     private float dashingCoolDown = 1f;
 
     private float horizontal;
+
     void Awake()
     {
         rigid2D = GetComponent<Rigidbody2D>();
@@ -40,6 +41,10 @@ public class PlayerCtl : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.isStoryProcessing)
+        {
+            return;
+        }
         if(GameManager.Instance.isSceneChanging)
         {
             return;
@@ -55,6 +60,14 @@ public class PlayerCtl : MonoBehaviour
                 }
             }
             anim.SetTrigger("Attack");
+        }
+        if (Input.GetKey(KeyCode.C))
+        {
+            if(coll.gameObject.tag == "Monster")
+            {
+                coll.GetComponent<MonsterCtl>().Damage(1);
+            }
+            anim.SetTrigger("Attack4");
         }
 
 

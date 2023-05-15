@@ -136,11 +136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 31582432991486666, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 99.238144
+      value: 93.9
       objectReference: {fileID: 0}
     - target: {fileID: 31582432991486666, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.0279064
+      value: -5.28
       objectReference: {fileID: 0}
     - target: {fileID: 31582432991486666, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: m_LocalPosition.z
@@ -173,6 +173,10 @@ PrefabInstance:
     - target: {fileID: 31582432991486666, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566444108648814541, guid: cc440b07647b447e7976495237bed443, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3208424030323977845, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: x
@@ -210,7 +214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &280785286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90375,7 +90379,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684094776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.6, z: 0}
+  m_LocalPosition: {x: -4, y: 0.3, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -90495,7 +90499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801301805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 1, z: 0}
+  m_LocalPosition: {x: -4.5, y: -1.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -90557,7 +90561,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -90601,4 +90605,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5181653794703246222, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
-  maxX: 96
+  maxX: 88
