@@ -58,7 +58,6 @@ public class PlayerCtl : MonoBehaviour
                     collider.GetComponent<MonsterCtl>().Damage(1);
                 }
             }
-            anim.SetTrigger("Attack");
         }
         if (Input.GetKey(KeyCode.C))
         {
@@ -67,7 +66,6 @@ public class PlayerCtl : MonoBehaviour
             {
                 coll.GetComponent<MonsterCtl>().Damage(1);
             }
-            anim.SetTrigger("Attack4");
         }
 
 
