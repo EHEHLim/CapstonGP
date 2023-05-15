@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCtl : MonoBehaviour
 {
     Rigidbody2D rigid2D;
-    SpriteRenderer spriteRenderer;
+    
     Animator anim;
     Transform tr;
     Collider2D coll;
@@ -14,8 +14,8 @@ public class PlayerCtl : MonoBehaviour
     public float jumpPower;
     public Transform pos;
     public Vector2 boxSize;
-    private bool isGrounded = true;
-    private bool canDoubleJump = false;
+    public bool isGrounded = true;
+    public bool canDoubleJump = false;
 
     private int direction = -1;
     private bool isDash = false;
@@ -24,17 +24,15 @@ public class PlayerCtl : MonoBehaviour
     private float dashingPower = 10f;
     private float dashingCoolDown = 1f;
 
-    private bool isContactingSomething = false;
-
     private float horizontal;
 
     void Awake()
     {
         rigid2D = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
         coll = GetComponent<Collider2D>();
+        gameObject.SetActive(false);
     }
 
     void Update()
@@ -48,7 +46,7 @@ public class PlayerCtl : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
             foreach(Collider2D collider in collider2Ds)
@@ -59,7 +57,8 @@ public class PlayerCtl : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKey(KeyCode.C))
+
+        if (Input.GetKeyDown(KeyCode.C))
         {
             Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
             if (coll.gameObject.tag == "Monster")
@@ -74,8 +73,7 @@ public class PlayerCtl : MonoBehaviour
             if(isGrounded == true || canDoubleJump)
             {
                 rigid2D.velocity = Vector2.up * jumpPower;
-                isGrounded = false;
-                anim.SetBool("isJump", true);
+                
                 if (isGrounded)
                 {
                     isGrounded = false;
@@ -88,26 +86,19 @@ public class PlayerCtl : MonoBehaviour
             
         }
 
-        if (Input.GetAxisRaw("Horizontal") != 0)
-            anim.SetBool("isRun", true);
-        else
-            anim.SetBool("isRun", false);
-
-
-        if (Input.GetButton("Horizontal"))
-        {
-            spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
-        }
-
+        
 
         horizontal = Input.GetAxisRaw("Horizontal");
-        if (horizontal < 0)
+        if (Input.GetButton("Horizontal"))
         {
-            direction = -1;
-        }
-        else
-        {
-            direction = 1;
+            if (horizontal < 0)
+            {
+                direction = -1;
+            }
+            else
+            {
+                direction = 1;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.LeftShift))
@@ -131,11 +122,8 @@ public class PlayerCtl : MonoBehaviour
         {
             return;
         }
-        if(isContactingSomething && !isGrounded)
-        {
-            return;
-        }
-        rigid2D.velocity = new Vector2(horizontal * moveSpeed, rigid2D.velocity.y);
+        transform.position += new Vector3(horizontal * moveSpeed * Time.deltaTime, 0);
+        
     }
 
     void OnDrawGizmos()
@@ -150,8 +138,17 @@ public class PlayerCtl : MonoBehaviour
         if(col.collider.CompareTag("GROUND"))
         {
             canDoubleJump = true;
-            anim.SetBool("isJump", false);
             isGrounded = true;
+            Debug.Log("ground on");
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("GROUND"))
+        {
+            Debug.Log("ground out");
+            isGrounded = false;
         }
     }
 
@@ -163,11 +160,13 @@ public class PlayerCtl : MonoBehaviour
         rigid2D.gravityScale = 0f;
         rigid2D.velocity = new Vector2(direction * tr.transform.localScale.x * dashingPower, 0f);
         yield return new WaitForSeconds(dashingTime);
+        rigid2D.velocity = Vector2.zero;
         rigid2D.gravityScale = originalGravity;
         isDash = false;
         yield return new WaitForSeconds(dashingCoolDown);
         canDash = true;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Item"))

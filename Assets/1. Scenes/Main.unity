@@ -811,3 +811,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5181653794703246219, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
   m_PrefabInstance: {fileID: 1579899854}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1579899856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200894512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d5e118b2c35ef46903cfef57158a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
