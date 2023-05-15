@@ -15,7 +15,8 @@ public class Portal : MonoBehaviour
         StartCoroutine(SceneStart());
         while(true)
         {
-            idx = (int)Random.Range(1, 5);
+            idx = (int)Random.Range(2,6);
+            
             if(SceneManager.GetActiveScene().buildIndex != idx)
             {
                 break;
