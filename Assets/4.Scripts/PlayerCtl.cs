@@ -29,7 +29,6 @@ public class PlayerCtl : MonoBehaviour
     void Awake()
     {
         rigid2D = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
         coll = GetComponent<Collider2D>();
         gameObject.SetActive(false);
