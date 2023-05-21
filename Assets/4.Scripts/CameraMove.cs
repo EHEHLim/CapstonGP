@@ -7,6 +7,7 @@ public class CameraMove : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private float maxX;
     private Transform playerTr;
+
     private void Awake()
     {
         player = GameManager.Instance.player;
