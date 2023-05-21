@@ -157,6 +157,8 @@ MonoBehaviour:
   jumpPower: 15
   pos: {fileID: 5181653794165658976}
   boxSize: {x: 1.5, y: 0.2}
+  isGrounded: 1
+  canDoubleJump: 0
 --- !u!95 &5181653794703246324
 Animator:
   serializedVersion: 5

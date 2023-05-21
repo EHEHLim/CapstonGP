@@ -148,6 +148,7 @@ public class PlayerCtl : MonoBehaviour
         {
             Debug.Log("ground out");
             isGrounded = false;
+            
         }
     }
 

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance = null;
     public bool isSceneChanging = false;
     public GameObject player;
+    public Canvas playerUi;
     public bool isStoryProcessing = false;
     private void Awake()
     {
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // Update is called once per frameß
     void Update()
     {
         
@@ -56,8 +57,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            playerUi.gameObject.SetActive(true);
             player.SetActive(true);
             player.GetComponent<Rigidbody2D>().gravityScale = 4;
+        }
+
+        if(playerUi.gameObject.activeSelf == true)
+        {
+            if(scene.name == "Main")
+            {
+                playerUi.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            playerUi.gameObject.SetActive(true);
+
         }
     }
 }
