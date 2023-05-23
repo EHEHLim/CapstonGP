@@ -21,11 +21,18 @@ public class PlayerCtl : MonoBehaviour
     private bool isDash = false;
     private bool canDash = true;
     private float dashingTime = 0.15f;
-    private float dashingPower = 10f;
+    private float dashingPower = 20f;
     private float dashingCoolDown = 1f;
 
     private float horizontal;
 
+    public bool IsDash
+    {
+        get
+        {
+            return isDash;
+        }
+    }
     void Awake()
     {
         rigid2D = GetComponent<Rigidbody2D>();
