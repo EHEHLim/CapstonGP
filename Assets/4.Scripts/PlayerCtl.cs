@@ -181,4 +181,9 @@ public class PlayerCtl : MonoBehaviour
             collision.gameObject.SetActive(false);
         }
     }
+
+    public void attackAnimStart()
+    {
+        GetComponent<Animator>().SetBool("isAttacking", false);
+    }
 }

@@ -9,9 +9,8 @@ public class Anim : MonoBehaviour
     SpriteRenderer spriteRenderer;
     PlayerCtl playerctl;
 
-    public int noOfClicks = 0;
-    float lastClickTime = 0;
     public float maxComboDelay = 0;
+    private bool inputAttack = false;
 
     void Awake()
     {
@@ -23,12 +22,12 @@ public class Anim : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             return;
         }
@@ -45,6 +44,12 @@ public class Anim : MonoBehaviour
         {
             anim.SetTrigger("isDash");
         }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            anim.SetBool("isAttacking", true);
+        }
+
 
         // Move animation
         if (Input.GetAxisRaw("Horizontal") != 0)
@@ -66,11 +71,11 @@ public class Anim : MonoBehaviour
 
         if (Input.GetButton("Horizontal"))
         {
-            
+
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         }
     }
- 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("GROUND"))
@@ -86,4 +91,6 @@ public class Anim : MonoBehaviour
             anim.SetBool("isJump", true);
         }
     }
+
+    
 }
