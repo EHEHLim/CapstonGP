@@ -125,10 +125,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpPower: 15
-  pos: {fileID: 9083012187421210530}
-  boxSize: {x: 1.5, y: 0.2}
   isGrounded: 1
   canDoubleJump: 0
+  canDash: 1
+  pos: {fileID: 9083012187421210530}
+  comboAttackBoxSizes:
+  - {x: 1.6, y: 3.3}
+  - {x: 1.6, y: 2}
+  - {x: 2, y: 0.5}
+  - {x: 2.5, y: 1.8}
+  poses:
+  - {x: 0.7, y: 0.8}
+  - {x: 0.8, y: 1.4}
+  - {x: 0.9, y: 0.6}
+  - {x: 0.55, y: 0.45}
+  attacking: 0
+  comboAttackIndex: 0
 --- !u!95 &9083012187056578906
 Animator:
   serializedVersion: 5
@@ -162,7 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d5e118b2c35ef46903cfef57158a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noOfClicks: 0
   maxComboDelay: 0
 --- !u!70 &8291264543126762340
 CapsuleCollider2D:
@@ -204,7 +215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9083012187421210529}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0.7, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

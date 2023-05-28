@@ -20,5 +20,6 @@ public class MonsterCtl : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Debug.Log("hit");
     }
 }

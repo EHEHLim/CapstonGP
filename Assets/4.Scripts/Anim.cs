@@ -10,7 +10,6 @@ public class Anim : MonoBehaviour
     PlayerCtl playerctl;
 
     public float maxComboDelay = 0;
-    private bool inputAttack = false;
 
     void Awake()
     {
@@ -20,6 +19,7 @@ public class Anim : MonoBehaviour
         anim.SetBool("isJump", false);
         anim.SetBool("isRun", false);
     }
+
     void Start()
     {
 
@@ -42,31 +42,29 @@ public class Anim : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            anim.SetTrigger("isDash");
+            if (playerctl.IsDash)
+            {
+                anim.SetTrigger("isDash");
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            anim.SetBool("isAttacking", true);
+            if (playerctl.isGrounded && !playerctl.IsDash)
+            {
+                anim.SetBool("isAttacking", true);
+            }
         }
 
 
         // Move animation
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            //if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.LeftShift))
-            //{
-            //    anim.SetTrigger("isDash");
-            //}
             anim.SetBool("isRun", true);
         }
         else
         {
             anim.SetBool("isRun", false);
-            //if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.LeftShift))
-            //{
-            //    anim.SetTrigger("isDash");
-            //}
         }
 
         if (Input.GetButton("Horizontal"))
