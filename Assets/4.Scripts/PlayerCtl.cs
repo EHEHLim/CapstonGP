@@ -26,15 +26,18 @@ public class PlayerCtl : MonoBehaviour
     private float dashingCoolDown = 1f;
 
     //Attack Variables
+    private int COMBO_ATTACK = 0;
+    private int BOW_ATTACK = 1;
+    public int attackValue = 0;
     [SerializeField] private Transform pos;
-    [SerializeField]private Vector2[] comboAttackBoxSizes;
+    [SerializeField] private Vector2[] comboAttackBoxSizes;
     [SerializeField] private Vector2[] poses;
     public bool attacking = false;
     [SerializeField]private int comboAttackIndex = 0;
 
 
     //===============================================Run Field===============================================
-    void Awake()
+    void Awake()//init Variables
     {
         rigid2D = GetComponent<Rigidbody2D>();
         tr = GetComponent<Transform>();
@@ -45,6 +48,7 @@ public class PlayerCtl : MonoBehaviour
 
     void Update()
     {
+        //Event Stop
         if (GameManager.Instance.isStoryProcessing)
         {
             return;
@@ -54,6 +58,7 @@ public class PlayerCtl : MonoBehaviour
             return;
         }
 
+        //Jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(isGrounded == true || canDoubleJump)
@@ -73,9 +78,10 @@ public class PlayerCtl : MonoBehaviour
             
         }
 
-        
-
+        //Get move key
         horizontal = Input.GetAxisRaw("Horizontal");
+
+        //Sprite Flip
         if (Input.GetButton("Horizontal"))
         {
             if (horizontal < 0)
@@ -87,8 +93,8 @@ public class PlayerCtl : MonoBehaviour
                 direction = 1;
             }
         }
-        
 
+        //Dash
         if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (canDash)
@@ -97,12 +103,34 @@ public class PlayerCtl : MonoBehaviour
             }
         }
 
-        
+        //Weapon Change
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            switch (attackValue)
+            {
+                case 0:
+                    attackValue = BOW_ATTACK;
+                    break;
+                case 1:
+                    attackValue = COMBO_ATTACK;
+                    break;
+            }
+        }
+
+        //Bow shot
+        if(attackValue == BOW_ATTACK)
+        {
+            if (Input.GetKeyUp(KeyCode.Z))
+            {
+                ArrowShoot();
+            }
+        }
     }
 
 
     void FixedUpdate()
     {
+        //EventStop
         if (GameManager.Instance.isSceneChanging)
         {
             return;
@@ -115,6 +143,8 @@ public class PlayerCtl : MonoBehaviour
         {
             return;
         }
+
+        //Movement
         transform.position += new Vector3(horizontal * moveSpeed * Time.deltaTime, 0);
         
     }
@@ -144,6 +174,7 @@ public class PlayerCtl : MonoBehaviour
     }
 
     //===============================================Attack Field===============================================
+    //Attack anim Field
     public void attackAnimStart()
     {
         GetComponent<Animator>().SetBool("isAttacking", false);
@@ -153,14 +184,6 @@ public class PlayerCtl : MonoBehaviour
     public void attackAnimEnd()
     {
         attacking = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Item"))
-        {
-            collision.gameObject.SetActive(false);
-        }
     }
 
     public void DrawComboAttack(int idx)
@@ -176,6 +199,11 @@ public class PlayerCtl : MonoBehaviour
                 collider.GetComponent<MonsterCtl>().Damage(1);
             }
         }
+    }
+
+    void ArrowShoot()
+    {
+
     }
 
     void OnDrawGizmos()
@@ -203,6 +231,14 @@ public class PlayerCtl : MonoBehaviour
             Debug.Log("ground out");
             isGrounded = false;
 
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            collision.gameObject.SetActive(false);
         }
     }
 }

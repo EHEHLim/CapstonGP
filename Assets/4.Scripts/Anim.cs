@@ -56,6 +56,19 @@ public class Anim : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyUp(KeyCode.Z))
+        {
+            if(playerctl.attackValue == 1)
+            {
+                anim.SetTrigger("BowShoot");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Invoke("ChangeWeapon", 0.01f);
+            
+        }
 
         // Move animation
         if (Input.GetAxisRaw("Horizontal") != 0)
@@ -74,6 +87,7 @@ public class Anim : MonoBehaviour
         }
     }
 
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("GROUND"))
@@ -90,5 +104,9 @@ public class Anim : MonoBehaviour
         }
     }
 
+    private void ChangeWeapon()
+    {
+        anim.SetInteger("attackIdx", playerctl.attackValue);
+    }
     
 }
