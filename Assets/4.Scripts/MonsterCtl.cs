@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MonsterCtl : MonoBehaviour
 {
-    public int Hp = 3;
+    [SerializeField] private int hp;
+    [SerializeField] private float moveSpeed;
     void Start()
     {
         
@@ -15,11 +16,10 @@ public class MonsterCtl : MonoBehaviour
     }
     public void Damage(int damage)
     {
-        Hp -= damage;
-        if (Hp <= 0)
+        hp -= damage;
+        if(hp <= 0)
         {
-            Destroy(gameObject);
+            Invoke("Destroy", 3f);
         }
-        Debug.Log("hit");
     }
 }
