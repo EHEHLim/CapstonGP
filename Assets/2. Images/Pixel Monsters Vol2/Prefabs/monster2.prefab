@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 7704916885611373698}
   - component: {fileID: 3687693311730732567}
   - component: {fileID: 6831596963395876881}
-  - component: {fileID: 8224124343821415969}
   - component: {fileID: 6450328695283624416}
   - component: {fileID: 6450328695283624417}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: monster2
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,21 +108,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8224124343821415969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6450328695283624419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb9e14ecc106154a8a57d0948b4fa9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextMove: 0
-  hp: 10
-  moveSpeed: 6
 --- !u!50 &6450328695283624416
 Rigidbody2D:
   serializedVersion: 4
@@ -144,7 +128,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &6450328695283624417
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
