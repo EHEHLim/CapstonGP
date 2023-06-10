@@ -26,6 +26,7 @@ public class PlayerCtl : MonoBehaviour
     private float dashingCoolDown = 1f;
 
     //Attack Variables
+    private int attackDamage = 30;
     private int COMBO_ATTACK = 0;
     private int BOW_ATTACK = 1;
     public int attackValue = 0;
@@ -196,7 +197,7 @@ public class PlayerCtl : MonoBehaviour
         {
             if (collider.gameObject.tag == "Monster")
             {
-
+                collider.GetComponent<BaseMonster>().hit(attackDamage);
             }
         }
     }
