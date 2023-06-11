@@ -249,6 +249,7 @@ public class PlayerCtl : MonoBehaviour
     //===============================================Hit Field===============================================
     public void Hit(int damage)
     {
+        Debug.Log("hurts");
         hp -= damage;
         if(hp <= 0)
         {

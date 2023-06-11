@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23479692732793446}
   - component: {fileID: 2214730412304834711}
   - component: {fileID: 8153169177968136613}
+  - component: {fileID: 1258431739294643206}
   m_Layer: 7
   m_Name: monster3
   m_TagString: Monster
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7652954092375344637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 9204249339653353611, guid: 15bad0bfb8ac44f439e72812968df89e, type: 3}
+  m_Sprite: {fileID: -2269706972725185433, guid: 5185f83dbe70ecd488c1f9ea8d7a645f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,3 +146,22 @@ CircleCollider2D:
   m_Offset: {x: 0.023278475, y: 0.053403705}
   serializedVersion: 2
   m_Radius: 0.2620664
+--- !u!114 &1258431739294643206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7652954092375344637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a12a780880149428da21a03936a44d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  moveSpeed: 10
+  state: 0
+  nextMove: 0
+  pos: {x: -1.3, y: -0.4, z: 0}
+  cubeSize: {x: 1, y: 1}
+  attackDamage: 0
