@@ -13,23 +13,23 @@ public abstract class BaseMonster : MonoBehaviour
     public enum State{
         IDLE,
         TRACE,
-        DIE
+        DIE,
+        ATTACK
     }
 
     public void hit(int damage)
     {
         hp -= damage;
-        if(hp <= damage)
-        {
-            state = State.DIE;
-        }
-        else
-        {
+        if(hp > 0)
             GetComponent<Animator>().SetTrigger("HIT");
-        }
     }
 
     abstract public IEnumerator CheckMonsterState();
 
     abstract public IEnumerator MonsterAction();
+
+    public void DieAnimEvent()
+    {
+        Destroy(gameObject);
+    }
 }

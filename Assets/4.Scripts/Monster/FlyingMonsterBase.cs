@@ -4,10 +4,11 @@ using UnityEngine;
 
 public abstract class FlyingMonsterBase : BaseMonster
 {
-    private void Awake()
+    protected void FlyingInit()
     {
         state = State.IDLE;
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = 0;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }
