@@ -36,6 +36,10 @@ public class PlayerCtl : MonoBehaviour
     public bool attacking = false;
     [SerializeField]private int comboAttackIndex = 0;
 
+    //HP Variables
+    [SerializeField] private int hp;
+    private int maxHp;
+    private bool isDead;
 
     //===============================================Run Field===============================================
     void Awake()//init Variables
@@ -45,6 +49,7 @@ public class PlayerCtl : MonoBehaviour
         coll = GetComponent<Collider2D>();
         gameObject.SetActive(false);
         anim = GetComponent<Animator>();
+        maxHp = hp;
     }
 
     void Update()
@@ -214,6 +219,7 @@ public class PlayerCtl : MonoBehaviour
         Gizmos.DrawWireCube(pos.position, comboAttackBoxSizes[comboAttackIndex]);
     }
 
+
     //===============================================Contact Field===============================================
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -221,7 +227,6 @@ public class PlayerCtl : MonoBehaviour
         {
             canDoubleJump = true;
             isGrounded = true;
-            Debug.Log("ground on");
         }
     }
 
@@ -229,9 +234,7 @@ public class PlayerCtl : MonoBehaviour
     {
         if (collision.collider.CompareTag("GROUND"))
         {
-            Debug.Log("ground out");
             isGrounded = false;
-
         }
     }
 
@@ -240,6 +243,16 @@ public class PlayerCtl : MonoBehaviour
         if (collision.gameObject.CompareTag("Item"))
         {
             collision.gameObject.SetActive(false);
+        }
+    }
+
+    //===============================================Hit Field===============================================
+    public void Hit(int damage)
+    {
+        hp -= damage;
+        if(hp <= 0)
+        {
+            isDead = true;
         }
     }
 }

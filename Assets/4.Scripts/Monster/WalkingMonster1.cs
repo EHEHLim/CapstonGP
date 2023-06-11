@@ -11,6 +11,7 @@ public class WalkingMonster1 : WalkingMonsterBase
         WalkingInit();
         anim = GetComponent<Animator>();
         StartCoroutine("MonsterMove");
+        StartCoroutine("CheckMonsterState");
         StartCoroutine("MonsterAction");
     }
 
@@ -76,8 +77,5 @@ public class WalkingMonster1 : WalkingMonsterBase
         }
     }
 
-    public void DieAnimEvent()
-    {
-        Destroy(gameObject);
-    }
+    
 }
