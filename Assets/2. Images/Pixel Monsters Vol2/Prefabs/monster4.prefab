@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3113000901570840264}
   - component: {fileID: 3401591480172261295}
   - component: {fileID: 5054371647698657192}
+  - component: {fileID: 6460946341992032079}
   m_Layer: 7
   m_Name: monster4
   m_TagString: Monster
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3975544248848397583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -145,3 +146,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0.008798778, y: -0.027196348}
   m_Size: {x: 0.2072711, y: 0.276062}
   m_Direction: 0
+--- !u!114 &6460946341992032079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3975544248848397583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb564e223f1e240aaa2d83a26c886fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  moveSpeed: 1
+  state: 0
+  nextMove: 0
+  pos: {x: -0.75, y: -0.07, z: 0}
+  cubeSize: {x: 2, y: 1}
+  traceSpeed: 5

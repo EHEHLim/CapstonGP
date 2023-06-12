@@ -6,8 +6,6 @@ using UnityEngine.Pool;
 public class FlyingMonster3 : FlyingMonsterBase
 {
     private Animator anim;
-    private float traceDistance;
-    private float attackDistance;
     public int nextMove;
     private bool isMovingIdle;
     private float distance;
@@ -176,15 +174,22 @@ public class FlyingMonster3 : FlyingMonsterBase
 
     public void Attack()
     {
-        
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos + transform.position, cubeSize, 0);
-        Debug.Log(collider2Ds.Length.ToString());
         foreach (Collider2D collider in collider2Ds)
         {
             if (collider.gameObject.tag == "Player")
             {
                 collider.GetComponent<PlayerCtl>().Hit(attackDamage);
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(state == State.DIE && collision.collider.CompareTag("GROUND"))
+        {
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
+            anim.SetTrigger("DIEONGROUND");
         }
     }
 }
