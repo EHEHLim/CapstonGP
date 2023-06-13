@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3691643227224732614}
-  - component: {fileID: -6327488745450030577}
   m_Layer: 0
   m_Name: MonsterGizmo
   m_TagString: Untagged
@@ -32,15 +31,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6327488745450030577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3628304904293243292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfffed46575f69d4fb7b701dfe7cfaac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

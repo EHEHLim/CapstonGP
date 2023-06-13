@@ -20,4 +20,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1. Scenes/Third_Scene.unity
     guid: ee86bc44bb5f1464b833fac6f3cb1e0a
+  - enabled: 1
+    path: Assets/1. Scenes/New Folder/New_1_S.unity
+    guid: 63cac5fca61984f4384c5ea802e8a1cb
+  - enabled: 1
+    path: Assets/1. Scenes/New Folder/New_2_S.unity
+    guid: 92576ad7564afec43ad39cf8e913f143
+  - enabled: 1
+    path: Assets/1. Scenes/New Folder/New_3_S.unity
+    guid: 32b587896a36d23448bfbb508b811918
+  - enabled: 1
+    path: Assets/1. Scenes/New Folder/New_4_S.unity
+    guid: be346874b7b76634893186fe9af6d25d
+  - enabled: 1
+    path: Assets/1. Scenes/New Folder/New_5_S.unity
+    guid: 3ea829a8e57de504d86346cab4320e14
+  - enabled: 1
+    path: Assets/1. Scenes/Last.unity
+    guid: 328fdf1d441de44298da3807e0198d43
   m_configObjects: {}

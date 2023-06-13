@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerCtl : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class PlayerCtl : MonoBehaviour
     Animator anim;
     Transform tr;
     Collider2D coll;
+    public RawImage panel;
 
     //Move Variables
     public float moveSpeed;             
@@ -38,7 +41,7 @@ public class PlayerCtl : MonoBehaviour
 
     //HP Variables
     [SerializeField] private int hp;
-    private int maxHp;
+    private int currHp;
     private bool isDead;
 
     //===============================================Run Field===============================================
@@ -49,7 +52,7 @@ public class PlayerCtl : MonoBehaviour
         coll = GetComponent<Collider2D>();
         gameObject.SetActive(false);
         anim = GetComponent<Animator>();
-        maxHp = hp;
+        currHp = hp;
     }
 
     void Update()
@@ -60,6 +63,10 @@ public class PlayerCtl : MonoBehaviour
             return;
         }
         if(GameManager.Instance.isSceneChanging)
+        {
+            return;
+        }
+        if (isDead)
         {
             return;
         }
@@ -146,6 +153,10 @@ public class PlayerCtl : MonoBehaviour
             return;
         }
         if (attacking)
+        {
+            return;
+        }
+        if (isDead)
         {
             return;
         }
@@ -249,11 +260,58 @@ public class PlayerCtl : MonoBehaviour
     //===============================================Hit Field===============================================
     public void Hit(int damage)
     {
-        Debug.Log("hurts");
-        hp -= damage;
-        if(hp <= 0)
+        
+        if (isDash)
+        {
+
+        }
+        else
+        {
+            currHp -= damage;
+            Debug.Log("hurts");
+        }
+
+        if(hp <= 0 && isDead == false)
         {
             isDead = true;
+            anim.SetTrigger("DIE");
+            
+            StartCoroutine(PlayerDieSceneChange());
         }
+    }
+
+    public void DieAnimEvent()
+    {
+        StartCoroutine(PlayerDieSceneChange());
+    }
+
+    IEnumerator PlayerDieSceneChange()
+    {
+        panel.gameObject.SetActive(true);
+        panel.color = new Color(0, 0, 0, 0f);
+        GameManager.Instance.isSceneChanging = true;
+        while (panel.color.a < 1f)
+        {
+            panel.color += new Color(0, 0, 0, 0.03f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        SceneManager.LoadScene("Last");
+
+
+        
+        isDead = false;
+        currHp = hp;
+
+
+
+        panel.color = new Color(0, 0, 0, 1f);
+        while (panel.color.a > 0f)
+        {
+            panel.color -= new Color(0, 0, 0, 0.03f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        GameManager.Instance.isSceneChanging = false;
+        panel.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

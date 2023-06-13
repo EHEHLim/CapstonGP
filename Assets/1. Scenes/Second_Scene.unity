@@ -1452,7 +1452,7 @@ Tilemap:
       - {fileID: 21300048, guid: ffc5a3f5b6234044e87e556883d205d0, type: 3}
       - {fileID: 21300050, guid: ffc5a3f5b6234044e87e556883d205d0, type: 3}
       - {fileID: 21300052, guid: ffc5a3f5b6234044e87e556883d205d0, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 129, y: -10, z: 0}
@@ -1644,7 +1644,7 @@ Tilemap:
       - {fileID: 21300048, guid: ffc5a3f5b6234044e87e556883d205d0, type: 3}
       - {fileID: 21300050, guid: ffc5a3f5b6234044e87e556883d205d0, type: 3}
       - {fileID: 21300052, guid: ffc5a3f5b6234044e87e556883d205d0, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 152, y: -10, z: 0}
@@ -2063,6 +2063,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2611624460667711186, guid: cc440b07647b447e7976495237bed443, type: 3}
+      propertyPath: x
+      value: 98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2611624460667711186, guid: cc440b07647b447e7976495237bed443, type: 3}
+      propertyPath: y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2611624460667711186, guid: cc440b07647b447e7976495237bed443, type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 1744270278}
     - target: {fileID: 3208424030323977845, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: x
       value: 98
@@ -2075,6 +2087,14 @@ PrefabInstance:
       propertyPath: panel
       value: 
       objectReference: {fileID: 1744270278}
+    - target: {fileID: 3718655521218473191, guid: cc440b07647b447e7976495237bed443, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718655521218473191, guid: cc440b07647b447e7976495237bed443, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.8
+      objectReference: {fileID: 0}
     - target: {fileID: 5829944420686853578, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: m_Name
       value: Portal
@@ -2413,7 +2433,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1699235617
 MonoBehaviour:
@@ -2427,7 +2447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd9f852217a24f9888b47caae1b98e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5181653794703246222, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
+  player: {fileID: 9083012186949961916, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
   maxX: 93
 --- !u!1 &1744270276
 GameObject:
