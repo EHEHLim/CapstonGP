@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - Item
   - GROUND
+  - TGROUND
   layers:
   - Default
   - TransparentFX
