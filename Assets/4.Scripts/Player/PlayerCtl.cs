@@ -234,7 +234,7 @@ public class PlayerCtl : MonoBehaviour
     //===============================================Contact Field===============================================
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.collider.CompareTag("GROUND"))
+        if (col.collider.CompareTag("GROUND") || col.collider.CompareTag("TGROUND"))
         {
             canDoubleJump = true;
             isGrounded = true;
@@ -243,7 +243,7 @@ public class PlayerCtl : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("GROUND"))
+        if (collision.collider.CompareTag("GROUND") || collision.collider.CompareTag("TGROUND"))
         {
             isGrounded = false;
         }

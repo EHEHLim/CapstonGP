@@ -90,7 +90,7 @@ public class Anim : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("GROUND"))
+        if (collision.collider.CompareTag("GROUND")|| collision.collider.CompareTag("TGROUND"))
         {
             anim.SetBool("isJump", false);
         }
@@ -98,7 +98,7 @@ public class Anim : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("GROUND"))
+        if (collision.collider.CompareTag("GROUND")|| collision.collider.CompareTag("TGROUND"))
         {
             anim.SetBool("isJump", true);
         }
