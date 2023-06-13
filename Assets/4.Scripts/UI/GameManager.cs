@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject[] monsters;
     private static GameManager instance = null;
     public bool isSceneChanging = false;
     public GameObject player;
     public Canvas playerUi;
     public bool isStoryProcessing = false;
+
     private void Awake()
     {
         if(instance == null)
