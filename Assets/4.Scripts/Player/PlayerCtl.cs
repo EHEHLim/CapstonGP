@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class PlayerCtl : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerCtl : MonoBehaviour
     Transform tr;
     Collider2D coll;
     public RawImage panel;
+    public CameraShakes vmCam;
 
     //Move Variables
     public float moveSpeed;             
@@ -47,6 +49,7 @@ public class PlayerCtl : MonoBehaviour
     //===============================================Run Field===============================================
     void Awake()//init Variables
     {
+        Debug.Log("awake");
         rigid2D = GetComponent<Rigidbody2D>();
         tr = GetComponent<Transform>();
         coll = GetComponent<Collider2D>();
@@ -267,6 +270,7 @@ public class PlayerCtl : MonoBehaviour
         }
         else
         {
+            vmCam.Attacked();
             currHp -= damage;
             Debug.Log("hurts");
         }

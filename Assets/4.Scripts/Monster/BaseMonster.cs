@@ -8,6 +8,7 @@ public abstract class BaseMonster : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     [SerializeField] protected int hp;
     [SerializeField] protected float moveSpeed;
+
     public State state = State.IDLE;
 
     public enum State{
@@ -16,7 +17,6 @@ public abstract class BaseMonster : MonoBehaviour
         DIE,
         ATTACK
     }
-
     public void hit(int damage)
     {
         hp -= damage;
