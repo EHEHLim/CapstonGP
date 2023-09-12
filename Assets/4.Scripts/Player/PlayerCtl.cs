@@ -20,6 +20,8 @@ public class PlayerCtl : MonoBehaviour
     public float jumpPower;
     public bool isGrounded = true;
     public bool canDoubleJump = false;
+    public GameObject jumpDust;
+    public GameObject doubleJumpDust;
     private float horizontal;
 
     //Dash Variables
@@ -29,6 +31,7 @@ public class PlayerCtl : MonoBehaviour
     private float dashingTime = 0.15f;
     private float dashingPower = 20f;
     private float dashingCoolDown = 1f;
+    public Transform[] dashdusts;
 
     //Attack Variables
     private int attackDamage = 30;
@@ -74,25 +77,7 @@ public class PlayerCtl : MonoBehaviour
             return;
         }
 
-        //Jump
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if(isGrounded == true || canDoubleJump)
-            {
-                rigid2D.velocity = Vector2.up * jumpPower;
-                
-                if (isGrounded)
-                {
-                    isGrounded = false;
-                }
-                else
-                {
-                    canDoubleJump = false;
-                    anim.SetTrigger("doubleJump");
-                }
-            }
-            
-        }
+        
 
         //Get move key
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -110,12 +95,51 @@ public class PlayerCtl : MonoBehaviour
             }
         }
 
+        //Jump
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isGrounded == true || canDoubleJump)
+            {
+                if (isGrounded)
+                {
+                    jumpDust.SetActive(true);
+                    jumpDust.GetComponent<FxControl>().JumpDustStart();
+                }
+                else if (canDoubleJump)
+                {
+                    doubleJumpDust.SetActive(true);
+                    doubleJumpDust.GetComponent<FxControl>().JumpDustStart();
+                }
+                rigid2D.velocity = Vector2.up * jumpPower;
+
+                if (isGrounded)
+                {
+                    isGrounded = false;
+                }
+                else
+                {
+                    canDoubleJump = false;
+                    anim.SetTrigger("doubleJump");
+                }
+            }
+
+        }
+
         //Dash
         if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (canDash)
             { 
                 StartCoroutine(Dash());
+                for (int i = 0; i < dashdusts.Length; i++)
+                {
+                    if (!dashdusts[i].gameObject.activeSelf)
+                    {
+                        dashdusts[i].gameObject.SetActive(true);
+                        dashdusts[i].GetComponent<FxControl>().dustStart();
+                        break;
+                    }
+                }
             }
         }
 
@@ -163,7 +187,8 @@ public class PlayerCtl : MonoBehaviour
         {
             return;
         }
-
+        
+        
         //Movement
         transform.position += new Vector3(horizontal * moveSpeed * Time.deltaTime, 0);
         

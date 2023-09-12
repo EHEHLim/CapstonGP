@@ -10,7 +10,6 @@ public class CameraShakes : MonoBehaviour
     private float shakeTime = 0.2f;
 
     private bool attacked = false;
-    private bool hitMonster = false;
 
     private float timer;
     private CinemachineBasicMultiChannelPerlin _cvmcp;
