@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
-    }
+    } 
 
     private void LoadedSceneEvent(Scene scene, LoadSceneMode mode)
     {
