@@ -77,8 +77,6 @@ public class PlayerCtl : MonoBehaviour
             return;
         }
 
-        
-
         //Get move key
         horizontal = Input.GetAxisRaw("Horizontal");
 
@@ -326,12 +324,8 @@ public class PlayerCtl : MonoBehaviour
         }
         SceneManager.LoadScene("Last");
 
-
-        
         isDead = false;
         currHp = hp;
-
-
 
         panel.color = new Color(0, 0, 0, 1f);
         while (panel.color.a > 0f)
