@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class OptionUI : MonoBehaviour
 {
-
+    public AudioSource btnsource;
     [SerializeField] private GameObject optionPanel;
     // Start is called before the first frame update
     private void Awake()
