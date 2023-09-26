@@ -9,17 +9,8 @@ EditorBuildSettings:
     path: Assets/1. Scenes/Main.unity
     guid: 7fbaabdaef97b4b79b10534ceeb7f6db
   - enabled: 1
-    path: Assets/1. Scenes/Tutorial.unity
-    guid: eab4a167746a84ec3a556b4b78700e9e
-  - enabled: 1
-    path: Assets/1. Scenes/First_Scene.unity
-    guid: 3da756bd4b5f24bcdbd466ef27c5558f
-  - enabled: 1
-    path: Assets/1. Scenes/Second_Scene.unity
-    guid: 865bdad813b3a410a8c0cb90011afa7b
-  - enabled: 1
-    path: Assets/1. Scenes/Third_Scene.unity
-    guid: ee86bc44bb5f1464b833fac6f3cb1e0a
+    path: Assets/1. Scenes/New Folder/Tutorial.unity
+    guid: de32571cc8bb13344a8b8591064797a9
   - enabled: 1
     path: Assets/1. Scenes/New Folder/New_1_S.unity
     guid: 63cac5fca61984f4384c5ea802e8a1cb
@@ -35,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1. Scenes/New Folder/New_5_S.unity
     guid: 3ea829a8e57de504d86346cab4320e14
+  - enabled: 1
+    path: Assets/1. Scenes/New Folder/New_6_S.unity
+    guid: 7e06b0a13eedca948bfb354923fcc784
+  - enabled: 1
+    path: Assets/1. Scenes/New Folder/New_7_S.unity
+    guid: b6f426aad10e4fc49854e58fed7fe353
   - enabled: 1
     path: Assets/1. Scenes/Last.unity
     guid: 328fdf1d441de44298da3807e0198d43
