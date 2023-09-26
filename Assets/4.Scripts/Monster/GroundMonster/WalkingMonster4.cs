@@ -15,7 +15,7 @@ public class WalkingMonster4 : WalkingMonsterBase
     public Vector2 cubeSize;
     private Transform target;
     private bool isAttcking;
-    private int attackDamage = 30;
+    [SerializeField] private int attackDamage = 30;
 
     [SerializeField] private float traceSpeed;
 
