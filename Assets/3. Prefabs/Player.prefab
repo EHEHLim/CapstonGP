@@ -126,11 +126,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 0}
+  vmCam: {fileID: 0}
   moveSpeed: 10
   jumpPower: 15
   isGrounded: 1
   canDoubleJump: 0
+  jumpDust: {fileID: 0}
+  doubleJumpDust: {fileID: 0}
   canDash: 1
+  dashdusts: []
   attackValue: 0
   pos: {fileID: 9083012187421210530}
   comboAttackBoxSizes:
@@ -209,7 +213,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01265049, y: 0.93457896}
+  m_Offset: {x: -0.0022335052, y: 0.9371832}
   m_SpriteTilingProperty:
     border: {x: 1.28125, y: 0, z: 1.28125, w: 1.375}
     pivot: {x: 0.5, y: 0}
@@ -220,7 +224,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5365753, y: 0.8455368}
+  m_Size: {x: 0.51574135, y: 0.84032834}
   m_EdgeRadius: 0
 --- !u!114 &3547786600212536651
 MonoBehaviour:
