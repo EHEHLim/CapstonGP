@@ -45,8 +45,8 @@ public class PlayerCtl : MonoBehaviour
     [SerializeField]private int comboAttackIndex = 0;
 
     //HP Variables
-    [SerializeField] private int hp;
-    private int currHp;
+    public int hp;
+    public int currHp;
     private bool isDead;
 
 
