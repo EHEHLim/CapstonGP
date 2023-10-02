@@ -49,6 +49,7 @@ public class PlayerCtl : MonoBehaviour
     private int currHp;
     private bool isDead;
 
+
     //===============================================Run Field===============================================
     void Awake()//init Variables
     {
