@@ -169,6 +169,7 @@ public class BossMonster1 : BaseMonster
         float originSpeed = moveSpeed;
         moveSpeed = rollingSpeed;
         yield return new WaitForSeconds(1f);
+        isAttcking = false;
         anim.SetBool("isRollAttacking", false);
         moveSpeed = originSpeed;
         nextMove = 0;
