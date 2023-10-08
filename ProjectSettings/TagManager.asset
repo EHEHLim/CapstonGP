@@ -9,6 +9,7 @@ TagManager:
   - Item
   - GROUND
   - TGROUND
+  - HP_BAR
   layers:
   - Default
   - TransparentFX
