@@ -45,8 +45,8 @@ public class PlayerCtl : MonoBehaviour
     [SerializeField]private int comboAttackIndex = 0;
 
     //HP Variables
-    public int hp;
-    public int currHp;
+    public float hp;
+    public float currHp;
     private bool isDead;
 
     //===============================================Run Field===============================================
@@ -294,7 +294,7 @@ public class PlayerCtl : MonoBehaviour
         else
         {
             vmCam.Attacked();
-            currHp -= damage;
+            currHp -= Random.Range(1f,11f);
             Debug.Log("hurts");
         }
 
