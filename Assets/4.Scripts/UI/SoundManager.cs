@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public AudioSource btnsource;
     public AudioSource musicsource;
+    private bool isAudioPlaying = false;
 
     public void SetMusicVolume(float volume)
     {
@@ -20,4 +21,26 @@ public class SoundManager : MonoBehaviour
     {
         btnsource.volume = volume;
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            btnsource.Play();
+        }
+    }
+    
+    public void ToggleAudio()
+    {
+        isAudioPlaying = !isAudioPlaying;
+
+        if (isAudioPlaying)
+        {
+            musicsource.Play();
+        }
+        else
+        {
+            musicsource.Stop();
+        }
+    }
+
 }
