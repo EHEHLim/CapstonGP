@@ -12,13 +12,17 @@ public class BossMonster1 : BaseMonster
     private int nextMove;
     private bool isAttcking;
     private bool isRoar = false;
+
     private bool rollingStart = false;
+    private bool jumpingStart = false;
+    private bool spikeStart = false;
 
     [SerializeField] private float rollingSpeed;
     [SerializeField] private float rollingDamage;
     [SerializeField] private float jumpDamage;
     [SerializeField] private float spikeDamage;
     [SerializeField] private GameObject spike;
+    [SerializeField] private Vector2[] spikePositions;
 
     private void Awake()
     {
@@ -115,7 +119,6 @@ public class BossMonster1 : BaseMonster
                         default:
                             break;
                     }
-                    state = State.IDLE;
                     break;
             }
         }
@@ -157,6 +160,10 @@ public class BossMonster1 : BaseMonster
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position + new Vector3(0.5f,-0.5f), new Vector2(6, 6));
+        foreach(Vector2 pos in spikePositions)
+        {
+            Gizmos.DrawWireSphere(pos, 0.3f);
+        }
     }
 
     public IEnumerator RollAttack()
@@ -177,11 +184,60 @@ public class BossMonster1 : BaseMonster
 
     public IEnumerator TakeOff()
     {
-        yield return null;
+        anim.SetTrigger("TAKEOFF");
+        yield return new WaitUntil(() => jumpingStart == true);
+        rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y + 100);
+        anim.SetBool("isGround", false);
+        rigid.gravityScale = 0f;
+        yield return new WaitForSeconds(1f);
+        isAttcking = true;
+        transform.position = new Vector3(GameManager.Instance.player.transform.position.x, transform.position.y);
+        yield return new WaitForSeconds(1f);
+        rigid.gravityScale = 10f;
+        yield return new WaitUntil(() => jumpingStart == false);
+        anim.SetBool("isGround", true);
+        isAttcking = false;
+        rigid.gravityScale = 4f;
     }
 
     public IEnumerator SpikeAttack()
     {
-        yield return null;
+        anim.SetTrigger("SPIKEATTACK");
+        yield return new WaitUntil(() => spikeStart == true);
+    }
+    public void JumpingStart()
+    {
+        jumpingStart = true;
+    }
+
+    public void RollingStart()
+    {
+        rollingStart = true;
+    }
+
+    public void RollingEnd()
+    {
+        rollingStart = false;
+    }
+
+    public void AttackStateEnd()
+    {
+        state = State.IDLE;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "GROUND")
+        {
+            jumpingStart = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "GROUND")
+        {
+            jumpingStart = true;
+        }
     }
 }

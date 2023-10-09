@@ -155,4 +155,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1.25
+    functionName: RollingStart
+    data: 
+    objectReferenceParameter: {fileID: 74822294678092665, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

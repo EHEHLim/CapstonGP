@@ -299,7 +299,7 @@ public class PlayerCtl : MonoBehaviour
             Debug.Log("hurts");
         }
 
-        if(hp <= 0 && isDead == false)
+        if(currHp <= 0 && isDead == false)
         {
             isDead = true;
             anim.SetTrigger("DIE");
