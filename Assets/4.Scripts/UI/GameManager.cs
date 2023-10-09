@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     public Canvas playerUi;
     public bool isStoryProcessing = false;
 
-
     private void Awake()
     {
         if (instance == null)

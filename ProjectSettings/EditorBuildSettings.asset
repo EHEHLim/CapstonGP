@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/1. Scenes/Main.unity
     guid: 7fbaabdaef97b4b79b10534ceeb7f6db
   - enabled: 1
+    path: Assets/1. Scenes/New Folder/Story.unity
+    guid: 7945d5f0497884831b67689aee5eec07
+  - enabled: 1
     path: Assets/1. Scenes/New Folder/Tutorial.unity
     guid: de32571cc8bb13344a8b8591064797a9
   - enabled: 1
