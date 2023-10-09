@@ -51,16 +51,21 @@ public class PlayerCtl : MonoBehaviour
 
 
     //===============================================Run Field===============================================
-    void Awake()//init Variables
+    void Awake()//init Values
     {
         Debug.Log("awake");
         rigid2D = GetComponent<Rigidbody2D>();
         tr = GetComponent<Transform>();
         coll = GetComponent<Collider2D>();
-        gameObject.SetActive(false);
         anim = GetComponent<Animator>();
         currHp = hp;
     }
+    private void OnEnable()
+    {
+        StartCoroutine(FadeIn());
+    }
+
+    
 
     void Update()
     {
@@ -285,7 +290,7 @@ public class PlayerCtl : MonoBehaviour
     }
 
     //===============================================Hit Field===============================================
-    public void Hit(int damage)
+    public void Hit(float damage)
     {
         
         if (isDash)
@@ -337,5 +342,14 @@ public class PlayerCtl : MonoBehaviour
         GameManager.Instance.isSceneChanging = false;
         panel.gameObject.SetActive(false);
         gameObject.SetActive(false);
+    }
+
+    IEnumerator FadeIn()
+    {
+        while (panel.color.a > 0f)
+        {
+            panel.color -= new Color(0, 0, 0, 0.03f);
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }

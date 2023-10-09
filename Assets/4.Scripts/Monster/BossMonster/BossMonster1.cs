@@ -20,9 +20,10 @@ public class BossMonster1 : BaseMonster
     [SerializeField] private float rollingSpeed;
     [SerializeField] private float rollingDamage;
     [SerializeField] private float jumpDamage;
-    [SerializeField] private float spikeDamage;
+    [SerializeField] public float spikeDamage;
     [SerializeField] private GameObject spike;
     [SerializeField] private Vector2[] spikePositions;
+    private GameObject[] spikes;
 
     private void Awake()
     {
@@ -35,6 +36,14 @@ public class BossMonster1 : BaseMonster
         StartCoroutine("CheckMonsterState");
         StartCoroutine("MonsterAction");
         target = GameManager.Instance.player.transform;
+        spikes = new GameObject[7];
+        for(int i = 0; i < spikes.Length; i++)
+        {
+            spikes[i] = Instantiate(spike);
+            spikes[i].transform.parent = this.transform;
+            spikes[i].transform.rotation = Quaternion.Euler(0,0,Mathf.Atan2(spikePositions[i].x, spikePositions[i].y) * Mathf.Rad2Deg);
+            spikes[i].transform.localPosition = spikePositions[i];
+        }
     }
 
     private void FixedUpdate()
@@ -186,7 +195,10 @@ public class BossMonster1 : BaseMonster
     {
         anim.SetTrigger("TAKEOFF");
         yield return new WaitUntil(() => jumpingStart == true);
-        rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y + 100);
+        while(transform.position.y < 100)
+        {
+            rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y + 10);
+        }
         anim.SetBool("isGround", false);
         rigid.gravityScale = 0f;
         yield return new WaitForSeconds(1f);
@@ -203,8 +215,19 @@ public class BossMonster1 : BaseMonster
     public IEnumerator SpikeAttack()
     {
         anim.SetTrigger("SPIKEATTACK");
+        anim.SetBool("isTired", false);
         yield return new WaitUntil(() => spikeStart == true);
+        anim.SetBool("isTired", true);
+        for(int i = 0; i < spikes.Length; i++)
+        {
+            spikes[i].transform.localPosition = spikePositions[i];
+            spikes[i].SetActive(true);
+        }
+        yield return new WaitForSeconds(2f);
+        spikeStart = false;
+        anim.SetBool("isTired", false);
     }
+
     public void JumpingStart()
     {
         jumpingStart = true;
@@ -223,6 +246,11 @@ public class BossMonster1 : BaseMonster
     public void AttackStateEnd()
     {
         state = State.IDLE;
+    }
+
+    public void SpikeStart()
+    {
+        spikeStart = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

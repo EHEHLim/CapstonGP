@@ -9,15 +9,16 @@ public class Portal : MonoBehaviour
     public float x, y;
     public int idx;
     [SerializeField] private RawImage panel;
-    private void Awake()
+    private void OnEnable()
     {
+        Debug.Log("isOn");
         GameManager.Instance.player.GetComponent<Transform>().position = new Vector3(x, y, 0);
         StartCoroutine(SceneStart());
-        while(true)
+        while (true)
         {
-            idx = (int)Random.Range(2,9);
-            
-            if(SceneManager.GetActiveScene().buildIndex != idx)
+            idx = (int)Random.Range(2, 9);
+
+            if (SceneManager.GetActiveScene().buildIndex != idx)
             {
                 break;
             }
