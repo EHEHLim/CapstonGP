@@ -8,7 +8,6 @@ public class FxControl : MonoBehaviour
     public void dustStart()
     {
         GetComponent<SpriteRenderer>().flipX = false;
-        Debug.Log("dusts on");
         transform.position = GameManager.Instance.player.transform.position;
         if (GameManager.Instance.player.GetComponent<SpriteRenderer>().flipX)
         {
@@ -26,7 +25,6 @@ public class FxControl : MonoBehaviour
 
     public void animEnd()
     {
-        Debug.Log("fx end");
         gameObject.SetActive(false);
     }
 

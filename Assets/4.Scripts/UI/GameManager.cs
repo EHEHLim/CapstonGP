@@ -14,19 +14,25 @@ public class GameManager : MonoBehaviour
     public Canvas playerUi;
     public bool isStoryProcessing = false;
 
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
 
             DontDestroyOnLoad(this.gameObject);
+
         }
         else
         {
             Destroy(this.gameObject);
         }
 
+    }
+
+    public void Start()
+    {
         SceneManager.sceneLoaded += LoadedSceneEvent;
     }
 
@@ -49,27 +55,20 @@ public class GameManager : MonoBehaviour
 
     private void LoadedSceneEvent(Scene scene, LoadSceneMode mode)
     {
-        if(player.activeSelf == true)
+        if (scene.name == "Main" || scene.name == "Last")
         {
-            if(scene.name == "Main")
-            {
-                player.SetActive(false);
-                player.GetComponent<Rigidbody2D>().gravityScale = 0;
-            }
+            player.SetActive(false);
+            player.GetComponent<Rigidbody2D>().gravityScale = 0;
         }
         else
         {
-            playerUi.gameObject.SetActive(true);
             player.SetActive(true);
             player.GetComponent<Rigidbody2D>().gravityScale = 4;
         }
 
-        if(playerUi.gameObject.activeSelf == true)
+        if (scene.name == "Main" || scene.name == "Last")
         {
-            if(scene.name == "Main")
-            {
-                playerUi.gameObject.SetActive(false);
-            }
+            playerUi.gameObject.SetActive(false);
         }
         else
         {

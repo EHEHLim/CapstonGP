@@ -7,11 +7,12 @@ public class PlayerCol : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("TGROUND"))
-            GetComponent<CapsuleCollider2D>().isTrigger = true;
+            collision.GetComponent<CompositeCollider2D>().isTrigger = true;
     }
+
     void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.CompareTag("TGROUND"))
-            GetComponent<CapsuleCollider2D>().isTrigger = false;
+            collision.GetComponent<CompositeCollider2D>().isTrigger = false;
     }
 }
