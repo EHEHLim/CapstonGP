@@ -6,6 +6,13 @@ public class SoundManager : MonoBehaviour
 {
     public AudioSource btnsource;
     public AudioSource musicsource;
+    private bool isMuted = false;
+    private float originalVolume;
+
+    private void Start()
+    {
+        originalVolume = musicsource.volume;
+    }
 
     public void SetMusicVolume(float volume)
     {
@@ -27,16 +34,31 @@ public class SoundManager : MonoBehaviour
             btnsource.Play();
         }
     }
-    
-    public void ToggleAudio()
+   public void ToggleMute()
     {
-        if (musicsource.isPlaying)
+        if (isMuted)
         {
-            musicsource.Stop();
+            musicsource.volume = originalVolume;
+            isMuted = false;
         }
         else
         {
-            musicsource.Play();
+            musicsource.volume = 0f;
+            isMuted = true;
+        }
+    }
+
+    public void ToggleEffect()
+    {
+        if (isMuted)
+        {
+            btnsource.volume = originalVolume;
+            isMuted = false;
+        }
+        else
+        {
+            btnsource.volume = 0f;
+            isMuted = true;
         }
     }
 
