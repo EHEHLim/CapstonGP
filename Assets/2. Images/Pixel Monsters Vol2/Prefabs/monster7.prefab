@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 74822294678092664}
   - component: {fileID: 7817911316103493961}
   - component: {fileID: 5917624235074485982}
+  - component: {fileID: 2251344525277790757}
   m_Layer: 7
   m_Name: monster7
   m_TagString: Monster
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 74822294678092665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 1152309559299816741, guid: 932a9fe6dbe88ce4b8b1f8bfbe5c4002, type: 3}
+  m_Sprite: {fileID: 5085769628534071879, guid: affcf1ec0712d23438503108f1b8a8bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,3 +146,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2251344525277790757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74822294678092665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa471621a79540ca8ebafd2c7e5b5f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1000
+  moveSpeed: 2
+  state: 0
+  rollingSpeed: 5
+  rollingDamage: 5
+  jumpDamage: 5
+  spikeDamage: 5
+  spike: {fileID: 8221571475009759319, guid: 3a357603f8d27f84abcb251ebe476aae, type: 3}

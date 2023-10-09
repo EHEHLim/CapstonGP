@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class BossMonster1 : BaseMonster
 {
@@ -11,6 +12,7 @@ public class BossMonster1 : BaseMonster
     private int nextMove;
     private bool isAttcking;
     private bool isRoar = false;
+    private bool rollingStart = false;
 
     [SerializeField] private float rollingSpeed;
     [SerializeField] private float rollingDamage;
@@ -29,19 +31,24 @@ public class BossMonster1 : BaseMonster
         StartCoroutine("CheckMonsterState");
         StartCoroutine("MonsterAction");
         target = GameManager.Instance.player.transform;
-        curState = State.ATTACK;
     }
 
     private void FixedUpdate()
     {
         if (isAttcking)
         {
-            return;
+            Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(transform.position + new Vector3(0.5f * nextMove, -0.5f), new Vector2(6, 6), 0);
+            foreach (Collider2D collider in collider2Ds)
+            {
+                if (collider.gameObject.tag == "Player")
+                {
+                    collider.gameObject.GetComponent<PlayerCtl>().Hit((int)rollingDamage);
+                }
+            }
         }
-
         if (state == State.IDLE)
         {
-            rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+            rigid.velocity = new Vector2(nextMove * moveSpeed, rigid.velocity.y);
         }
     }
     public override IEnumerator CheckMonsterState()
@@ -49,7 +56,7 @@ public class BossMonster1 : BaseMonster
         while (state != State.DIE)
         {
             yield return new WaitForSeconds(0.3f);
-            
+
             if (hp <= 0)
             {
                 state = State.DIE;
@@ -76,6 +83,15 @@ public class BossMonster1 : BaseMonster
                     {
                         anim.SetBool("isWalking", true);
                     }
+                    int rdState = Random.Range(0, 2);
+                    if (rdState == 0)
+                    {
+                        state = State.IDLE;
+                    }
+                    else
+                    {
+                        state = State.ATTACK;
+                    }
                     break;
                 case State.TRACE:
 
@@ -88,7 +104,7 @@ public class BossMonster1 : BaseMonster
                     switch (randnum)
                     {
                         case 0:
-                            anim.SetTrigger("ROLLATTACK");
+                            StartCoroutine("RollAttack");
                             break;
                         case 1:
                             anim.SetTrigger("TAKEOFF");
@@ -108,11 +124,14 @@ public class BossMonster1 : BaseMonster
     public IEnumerator MonsterMove()
     {
         int roar = Random.Range(0, 10);
+        nextMove = Random.Range(-1, 2);
         if (roar < 3)
+        {
             isRoar = true;
+            nextMove = 0;
+        }
         else
             isRoar = false;
-        nextMove = Random.Range(-1, 2);
         switch (nextMove)
         {
             case -1:
@@ -120,6 +139,7 @@ public class BossMonster1 : BaseMonster
 
                 break;
             case 0:
+                nextMove = 0;
                 break;
             case 1:
                 spriteRenderer.flipX = true;
@@ -127,24 +147,41 @@ public class BossMonster1 : BaseMonster
                 break;
         }
         yield return new WaitForSeconds(1f);
-        if(state == State.IDLE)
+        if (state == State.IDLE)
         {
             StartCoroutine(MonsterMove());
         }
     }
 
-    public void RollAttack()
+    private void OnDrawGizmos()
     {
-        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + new Vector3(0.5f,-0.5f), new Vector2(6, 6));
     }
 
-    public void TakeOff()
+    public IEnumerator RollAttack()
     {
-
+        anim.SetTrigger("ROLLATTACK");
+        anim.SetBool("isRollAttacking", true);
+        yield return new WaitUntil(() => rollingStart == true);
+        isAttcking = true;
+        nextMove = GameManager.Instance.player.transform.position.x > transform.position.x ? 1 : -1;
+        float originSpeed = moveSpeed;
+        moveSpeed = rollingSpeed;
+        yield return new WaitForSeconds(1f);
+        isAttcking = false;
+        anim.SetBool("isRollAttacking", false);
+        moveSpeed = originSpeed;
+        nextMove = 0;
     }
 
-    public void SpikeAttack()
+    public IEnumerator TakeOff()
     {
+        yield return null;
+    }
 
+    public IEnumerator SpikeAttack()
+    {
+        yield return null;
     }
 }
