@@ -30,6 +30,6 @@ public class Main_MainUi : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(10);
     }
 }

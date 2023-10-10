@@ -8,7 +8,6 @@ public class BossMonster1 : BaseMonster
 {
     private Animator anim;
     private Transform target;
-    private State curState;
     private int nextMove;
     private bool isAttcking;
     private bool isRoar = false;
@@ -16,13 +15,14 @@ public class BossMonster1 : BaseMonster
     private bool rollingStart = false;
     private bool jumpingStart = false;
     private bool spikeStart = false;
+    private bool isStateEnd = false;
 
     [SerializeField] private float rollingSpeed;
     [SerializeField] private float rollingDamage;
     [SerializeField] private float jumpDamage;
     [SerializeField] public float spikeDamage;
     [SerializeField] private GameObject spike;
-    [SerializeField] private Vector2[] spikePositions;
+    [SerializeField] public Vector3[] spikePositions;
     private GameObject[] spikes;
 
     private void Awake()
@@ -32,7 +32,6 @@ public class BossMonster1 : BaseMonster
         rigid.gravityScale = 4;
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        StartCoroutine("MonsterMove");
         StartCoroutine("CheckMonsterState");
         StartCoroutine("MonsterAction");
         target = GameManager.Instance.player.transform;
@@ -42,7 +41,7 @@ public class BossMonster1 : BaseMonster
             spikes[i] = Instantiate(spike);
             spikes[i].transform.parent = this.transform;
             spikes[i].transform.rotation = Quaternion.Euler(0,0,Mathf.Atan2(spikePositions[i].x, spikePositions[i].y) * Mathf.Rad2Deg);
-            spikes[i].transform.localPosition = spikePositions[i];
+            spikes[i].SetActive(false);
         }
     }
 
@@ -68,12 +67,25 @@ public class BossMonster1 : BaseMonster
     {
         while (state != State.DIE)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.15f);
 
             if (hp <= 0)
             {
                 state = State.DIE;
             }
+
+            if(state == State.IDLE && isStateEnd)
+            {
+                state = State.ATTACK;
+            }
+            else if(state == State.ATTACK && isStateEnd)
+            {
+                state = State.IDLE;
+            }
+
+            yield return new WaitForSeconds(0.15f);
+
+            isStateEnd = false;
         }
     }
 
@@ -86,8 +98,10 @@ public class BossMonster1 : BaseMonster
             switch (state)
             {
                 case State.IDLE:
+                    StartCoroutine("MonsterMove");
                     if (rigid.velocity.x == 0)
                     {
+                        
                         anim.SetBool("isWalking", false);
                         if (isRoar)
                             anim.SetTrigger("ROAR");
@@ -96,15 +110,7 @@ public class BossMonster1 : BaseMonster
                     {
                         anim.SetBool("isWalking", true);
                     }
-                    int rdState = Random.Range(0, 2);
-                    if (rdState == 0)
-                    {
-                        state = State.IDLE;
-                    }
-                    else
-                    {
-                        state = State.ATTACK;
-                    }
+                    isStateEnd = true;
                     break;
                 case State.TRACE:
 
@@ -117,13 +123,14 @@ public class BossMonster1 : BaseMonster
                     switch (randnum)
                     {
                         case 0:
-                            StartCoroutine("RollAttack");
+                            StartCoroutine(RollAttack());
+                            
                             break;
                         case 1:
-                            anim.SetTrigger("TAKEOFF");
+                            StartCoroutine(TakeOff());
                             break;
                         case 2:
-                            anim.SetTrigger("SPIKEATTACK");
+                            StartCoroutine(SpikeAttack());
                             break;
                         default:
                             break;
@@ -159,10 +166,7 @@ public class BossMonster1 : BaseMonster
                 break;
         }
         yield return new WaitForSeconds(1f);
-        if (state == State.IDLE)
-        {
-            StartCoroutine(MonsterMove());
-        }
+        isStateEnd = true;
     }
 
     private void OnDrawGizmos()
@@ -189,6 +193,7 @@ public class BossMonster1 : BaseMonster
         anim.SetBool("isRollAttacking", false);
         moveSpeed = originSpeed;
         nextMove = 0;
+        isStateEnd = true;
     }
 
     public IEnumerator TakeOff()
@@ -197,7 +202,8 @@ public class BossMonster1 : BaseMonster
         yield return new WaitUntil(() => jumpingStart == true);
         while(transform.position.y < 100)
         {
-            rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y + 10);
+            rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y + 1);
+            yield return new WaitForSeconds(0.01f);
         }
         anim.SetBool("isGround", false);
         rigid.gravityScale = 0f;
@@ -210,6 +216,7 @@ public class BossMonster1 : BaseMonster
         anim.SetBool("isGround", true);
         isAttcking = false;
         rigid.gravityScale = 4f;
+        isStateEnd = true;
     }
 
     public IEnumerator SpikeAttack()
@@ -217,15 +224,17 @@ public class BossMonster1 : BaseMonster
         anim.SetTrigger("SPIKEATTACK");
         anim.SetBool("isTired", false);
         yield return new WaitUntil(() => spikeStart == true);
+        Debug.Log("spike shoot");
         anim.SetBool("isTired", true);
         for(int i = 0; i < spikes.Length; i++)
         {
-            spikes[i].transform.localPosition = spikePositions[i];
+            spikes[i].GetComponent<Boss1Spike>().setPosition(spikePositions[i]);
             spikes[i].SetActive(true);
         }
         yield return new WaitForSeconds(2f);
         spikeStart = false;
         anim.SetBool("isTired", false);
+        isStateEnd = true;
     }
 
     public void JumpingStart()

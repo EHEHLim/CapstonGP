@@ -241,6 +241,14 @@ public class PlayerCtl : MonoBehaviour
         pos.localPosition = poses[comboAttackIndex];
         pos.localPosition = new Vector3(pos.localPosition.x * direction,pos.localPosition.y,0);
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, comboAttackBoxSizes[comboAttackIndex], 0);
+        foreach(Collider2D collider2d in collider2Ds)
+        {
+            if (collider2d.tag == "Monster")
+            {
+                vmCam.Attacked();
+                break;
+            }
+        }
         foreach (Collider2D collider in collider2Ds)
         {
             if (collider.gameObject.tag == "Monster")
@@ -299,7 +307,7 @@ public class PlayerCtl : MonoBehaviour
         }
         else
         {
-            vmCam.Attacked();
+            
             currHp -= Random.Range(1f,11f);
             Debug.Log("hurts");
         }

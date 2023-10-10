@@ -19,6 +19,11 @@ public class Portal : MonoBehaviour
         }
         while (true)
         {
+            if(GameManager.Instance.mapCounting >= 0)
+            {
+                idx = 10;
+                break;
+            }
             idx = (int)Random.Range(3, 10);
 
             if (SceneManager.GetActiveScene().buildIndex != idx)
@@ -59,6 +64,7 @@ public class Portal : MonoBehaviour
 
     IEnumerator SceneChange()
     {
+        GameManager.Instance.mapCounting++;
         panel.color = new Color(0, 0, 0, 0f);
         GameManager.Instance.isSceneChanging = true;
         while(panel.color.a < 1f)
