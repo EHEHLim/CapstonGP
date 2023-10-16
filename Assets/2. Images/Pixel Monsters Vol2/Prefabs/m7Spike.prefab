@@ -137,3 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spikeSpeed: 0.1
+  Boss: {fileID: 74822294678092665, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}

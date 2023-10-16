@@ -5,15 +5,9 @@ using UnityEngine;
 public class Boss1Spike : MonoBehaviour
 {
     [SerializeField] private float spikeSpeed;
+    [SerializeField] private GameObject Boss;
     private float spikeDamage;
     // Start is called before the first frame update
-    
-    void OnEnable()
-    {
-        spikeDamage = GetComponentInParent<BossMonster1>().spikeDamage;
-        Invoke("hide", 5f);
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -35,8 +29,9 @@ public class Boss1Spike : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void setPosition(Vector3 pos)
+    public void initSpike()
     {
-        transform.localPosition = pos;
+        gameObject.SetActive(false);
+        spikeDamage = Boss.GetComponent<BossMonster1>().spikeDamage;
     }
 }
