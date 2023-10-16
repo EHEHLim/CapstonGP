@@ -144,7 +144,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &2251344525277790757
 MonoBehaviour:
@@ -161,7 +161,7 @@ MonoBehaviour:
   hp: 1000
   moveSpeed: 2
   state: 0
-  rollingSpeed: 5
+  rollingSpeed: 100
   rollingDamage: 5
   jumpDamage: 5
   spikeDamage: 5
