@@ -40,8 +40,10 @@ public class BossMonster1 : BaseMonster
         for (int i = 0; i < spikes.Length; i++)
         {
             spikes[i] = Instantiate(spike);
+            spikes[i].transform.parent = this.transform;
             spikes[i].GetComponent<Boss1Spike>().initSpike();
-            spikes[i].transform.rotation = Quaternion.Euler(0,0,Vector2.Angle(new Vector2(spikePositions[i].x,0), new Vector2(spikePositions[i].x, spikePositions[i].y)));
+            spikes[i].transform.position = spikePositions[i];
+            spikes[i].transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(spikePositions[i].y, spikePositions[i].x)*Mathf.Rad2Deg +180);
         }
     }
 
@@ -62,13 +64,24 @@ public class BossMonster1 : BaseMonster
         {
             rigid.velocity = new Vector2(nextMove * moveSpeed, rigid.velocity.y);
         }
-        if (rigid.velocity.x > 0)
+
+        if (nextMove > 0)
         {
             spriteRenderer.flipX = true;
         }
-        else if(rigid.velocity.x < 0)
+        else if(nextMove < 0)
         {
             spriteRenderer.flipX = false;
+        }
+
+        if (nextMove != 0)
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else
+        {
+
+            anim.SetBool("isWalking", false);
         }
     }
     public override IEnumerator CheckMonsterState()
@@ -108,7 +121,6 @@ public class BossMonster1 : BaseMonster
                     StartCoroutine("MonsterMove");
                     if (rigid.velocity.x == 0)
                     {
-                        anim.SetBool("isWalking", false);
                         if (isRoar)
                             anim.SetTrigger("ROAR");
                     }
@@ -151,26 +163,12 @@ public class BossMonster1 : BaseMonster
         nextMove = Random.Range(-1, 2);
         if (roar < 3)
         {
-            isRoar = true;
             nextMove = 0;
+            isRoar = true;
         }
         else
             isRoar = false;
-        switch (nextMove)
-        {
-            case -1:
-                spriteRenderer.flipX = false;
-
-                break;
-            case 0:
-                nextMove = 0;
-                break;
-            case 1:
-                spriteRenderer.flipX = true;
-
-                break;
-        }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         nextMove = 0;
         yield return new WaitForSeconds(0.7f);
         isStateEnd = true;
@@ -209,7 +207,7 @@ public class BossMonster1 : BaseMonster
         rigid.velocity = new Vector2(0, 10);
         float originGravity = rigid.gravityScale;
         rigid.gravityScale = 0;
-        yield return new WaitUntil(() => transform.position.y > 100);
+        yield return new WaitUntil(() => transform.position.y > 30);
         transform.position = new Vector3(GameManager.Instance.player.transform.position.x, transform.position.y);
         rigid.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(1f);

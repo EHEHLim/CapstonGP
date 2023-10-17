@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5713290405237739448}
   - component: {fileID: 8396319029429666690}
   - component: {fileID: 4475612088742328778}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: m7Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,5 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9cb68401cd0448f9e9e99eddf6b718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeSpeed: 0.1
+  spikeSpeed: 10
   Boss: {fileID: 74822294678092665, guid: 912f096b666b75f4ea4ca3210c610072, type: 3}
