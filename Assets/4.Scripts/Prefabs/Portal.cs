@@ -19,7 +19,7 @@ public class Portal : MonoBehaviour
         }
         while (true)
         {
-            if(GameManager.Instance.mapCounting >= 0)
+            if(GameManager.Instance.mapCounting >= 7)
             {
                 idx = 10;
                 break;
