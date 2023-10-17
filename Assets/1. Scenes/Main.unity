@@ -2677,6 +2677,7 @@ MonoBehaviour:
   player: {fileID: 1200894512}
   playerUi: {fileID: 389212515}
   isStoryProcessing: 0
+  mapCounting: 0
 --- !u!1 &1363618192
 GameObject:
   m_ObjectHideFlags: 0

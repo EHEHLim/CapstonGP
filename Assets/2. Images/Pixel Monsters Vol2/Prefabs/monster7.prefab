@@ -159,9 +159,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1000
-  moveSpeed: 2
+  moveSpeed: 4
   state: 0
-  rollingSpeed: 100
+  rollingSpeed: 30
   rollingDamage: 5
   jumpDamage: 5
   spikeDamage: 5

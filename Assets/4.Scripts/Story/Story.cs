@@ -12,6 +12,9 @@ public class Story : MonoBehaviour
     public TextMeshProUGUI mainText;
     public float typingSpeed = 0.05f;
     public int storyProcess;
+    private bool stopTyping = false;
+    private bool stopStory = false;
+    public Canvas storySkip;
 
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private RawImage mainPanel;
@@ -28,16 +31,17 @@ public class Story : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        storySkip.gameObject.SetActive(false);
         mainPanelStory = new string[]
         {
-            "20XX\n\n세상은 급속도로 발전하고 있었고\n인류 문명의 빠른 발전은 환경파괴를 야기하고 있었다."/*,
+            "20XX\n\n세상은 급속도로 발전하고 있었고\n인류 문명의 빠른 발전은 환경파괴를 야기하고 있었다.",
             "지구는 그에 대한 복수라도 하는 듯,\n인류 문명에는 정체불명의 전염병이 창궐하였다.",
             "그로인해 인류의 90%가 사망하였다.\n남은 과학자의 연구로 전염병은 한 바이러스로 인한 것임을 알게됐지만\n바이러스의 전염경로는 알 수 있는 방법이 없었고\n치료약 또한 만들 수 있는 방법이 없었다.",
-            "절망 속에서 인류를 종속시키기 위해\n과학자들은 한가지 선택을 하게된다."*/
+            "절망 속에서 인류를 종속시키기 위해\n과학자들은 한가지 선택을 하게된다."
         };
         ScientistStory = new string[]
         {
-            "바이러스가 원인인 걸 알았지만... 이건... 도저히 방법이 없군...."/*,
+            "바이러스가 원인인 걸 알았지만... 이건... 도저히 방법이 없군....",
             "바이러스의 잠복기가 10년인 탓에 아직 남아있는 인류도 바이러스에 감염 되어 있을거야...",
             "지직... 지....지지직...",
             "!?",
@@ -72,11 +76,11 @@ public class Story : MonoBehaviour
             "지직....툭",
             "(무전이 끊어졌다)",
             "(지하실로 이동하자)",
-            "(계단앞 문에서 위화살표키를 누르면 이동합니다)"*/
+            "(계단앞 문에서 위화살표키를 누르면 이동합니다)"
         };
         mainStory = new string[]
         {
-            "지직... 지지직...."/*,
+            "지직... 지지직....",
             "나는....누구....?",
             "!!!!!",
             "으윽 머리가....!",
@@ -85,14 +89,14 @@ public class Story : MonoBehaviour
             "!!!",
             "내 관리하의 클론들은 어떻게 된거지!?!?",
             "지직....툭",
-            "크으윽.. 다시 머리가...!"*/
+            "크으윽.. 다시 머리가...!"
         };
         pastThings = new string[]
         {
-            "나는 XXX박사님의 임무를 받들어 클론들을 관리하고 있었다\n수백년간....\n바이러스가 사라지기만을 기다리며..."/*,
+            "나는 XXX박사님의 임무를 받들어 클론들을 관리하고 있었다\n수백년간....\n바이러스가 사라지기만을 기다리며...",
             "박사님의 유언에 따르면 클론들을 관리하는 안드로이드는\n세계 각국에 있는 듯 하였다.",
             "나는 클론들을 관리하며 평화로운 나날들을 보내고 있었다...\n그날이 있기 전까지는...",
-            "지지직....\n 코드 : MEXRROR_2030-6\n해당 기체의 기억에 결함 발생\n가까운 연구소로 가서 수리요구"*/
+            "지지직....\n 코드 : MEXRROR_2030-6\n해당 기체의 기억에 결함 발생\n가까운 연구소로 가서 수리요구"
         };
         mainStory2 = new string[]
         {
@@ -120,7 +124,30 @@ public class Story : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(isTyping == true)
+        {
+            if (Input.anyKeyDown)
+            {
+                stopTyping = true;
+            }
+        }
+
+        if(GameManager.Instance.isStoryProcessing == true)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                if (storySkip.gameObject.activeSelf)
+                {
+                    Time.timeScale = 1f;
+                    storySkip.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Time.timeScale = 0f;
+                    storySkip.gameObject.SetActive(true);
+                }
+            }
+        }
     }
 
     private IEnumerator storyProcessMap2()
@@ -144,9 +171,12 @@ public class Story : MonoBehaviour
         {
             txt.text = "";
             StartCoroutine(Typing(str, txt));
+            if (stopStory)
+                break;
             yield return new WaitUntil(() => isTyping == false);
             yield return new WaitUntil(() => Input.anyKeyDown);
         }
+        stopStory = false;
         txt.gameObject.SetActive(false);
 
         StartCoroutine(FadeOut(mainPanel));
@@ -155,9 +185,12 @@ public class Story : MonoBehaviour
         {
             mainText.text = "";
             StartCoroutine(Typing(str, mainText));
+            if (stopStory)
+                break;
             yield return new WaitUntil(() => isTyping == false);
             yield return new WaitUntil(() => Input.anyKeyDown);
         }
+        stopStory = false;
         mainText.gameObject.SetActive(false);
         StartCoroutine(FadeIn(mainPanel));
 
@@ -166,9 +199,12 @@ public class Story : MonoBehaviour
         {
             txt.text = "";
             StartCoroutine(Typing(str, txt));
+            if (stopStory)
+                break;
             yield return new WaitUntil(() => isTyping == false);
             yield return new WaitUntil(() => Input.anyKeyDown);
         }
+        stopStory = false;
         txt.gameObject.SetActive(false);
         StartCoroutine(StroySlideOut(panel1));
         StartCoroutine(StroySlideOut(panel2));
@@ -187,6 +223,8 @@ public class Story : MonoBehaviour
             mainText.text = "";
             mainText.color = new Color(1f, 1f, 1f, 1f);
             StartCoroutine(Typing(str,mainText));
+            if (stopStory)
+                break;
             yield return new WaitUntil(() => isTyping == false);
             yield return new WaitUntil(() => Input.anyKeyDown);
             while(mainText.color.a > 0f)
@@ -195,6 +233,7 @@ public class Story : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
         }
+        stopStory = false;
         mainText.gameObject.SetActive(false);
 
         GameManager.Instance.player.transform.position = playerSpawnPoint.position;
@@ -210,9 +249,12 @@ public class Story : MonoBehaviour
         {
             txt.text = "";
             StartCoroutine(Typing(str, txt));
+            if (stopStory)
+                break;
             yield return new WaitUntil(() => isTyping == false);
             yield return new WaitUntil(() => Input.anyKeyDown);
         }
+        stopStory = false;
         txt.gameObject.SetActive(false);
         StartCoroutine(StroySlideOut(panel1));
         StartCoroutine(StroySlideOut(panel2));
@@ -247,14 +289,24 @@ public class Story : MonoBehaviour
     {
         isTyping = true; //typing 시작
         txt.text = ""; // text 대사창 초기화
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         //1초 대기
 
         //SubString으로 문자열 0번째 부터 i번째까지 반복 typingSpeed로 속도 조절
         for (int i = 0; i < str.Length; i++)
         {
             txt.text = str.Substring(0, i);                 // str문자열의 0번쨰 부터 i번째까지의 문자열을 txt.text에 반영 (대사창)
-            yield return new WaitForSeconds(typingSpeed);   // 글자 출력 후 0.05초 기다
+            yield return new WaitForSeconds(typingSpeed);
+            if(stopTyping == true)
+            {
+                txt.text = str;
+                stopTyping = false;
+                break;
+            }
+            if(stopStory == true)
+            {
+                break;
+            }
         }
         isTyping = false; //typing 끝
     }
@@ -283,6 +335,19 @@ public class Story : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         isFading = false;
+    }
+
+    public void OnClickSkipYes()
+    {
+        Time.timeScale = 1f;
+        stopStory = true;
+        storySkip.gameObject.SetActive(false);
+    }
+
+    public void OnClickSkipNo()
+    {
+        Time.timeScale = 1f;
+        storySkip.gameObject.SetActive(false);
     }
 }
 

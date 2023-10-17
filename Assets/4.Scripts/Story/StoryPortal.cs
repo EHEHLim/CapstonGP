@@ -37,6 +37,6 @@ public class StoryPortal : MonoBehaviour
             pn.color -= new Color(0, 0, 0, 0.02f);  //panel의 투명도를 0.02씩 낮
             yield return new WaitForSeconds(0.01f); //0.01초 대기
         }
-        SceneManager.LoadScene(10);
+        SceneManager.LoadScene(2);
     }
 }
