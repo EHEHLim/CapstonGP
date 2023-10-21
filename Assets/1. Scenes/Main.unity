@@ -1875,6 +1875,7 @@ Transform:
   - {fileID: 285726350}
   - {fileID: 878869308}
   - {fileID: 398725123}
+  - {fileID: 1226545256}
   m_Father: {fileID: 1296594756}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2897,6 +2898,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9083012186949961916, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
   m_PrefabInstance: {fileID: 9083012185816726156}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1226545255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226545256}
+  m_Layer: 6
+  m_Name: DamageEffectGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1226545256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226545255}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 691167568}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1296594755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2949,6 +2981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d661117b0244a45963ea1d0455d310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageEffect: {fileID: 253011414678743761, guid: c81b2c8c83f91488d9eb326a919a74ac, type: 3}
   monsters:
   - {fileID: 1268601493232021450, guid: 38424f333225c7e4fb6f68118191fc4c, type: 3}
   - {fileID: 6450328695283624419, guid: 6617b6fafb7d3f74090cb160ce26a6f0, type: 3}
@@ -4985,7 +5018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9083012187056578900, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
       propertyPath: hp
-      value: 100000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9083012187056578900, guid: 1f5c615d6892a481692e513f3c939325, type: 3}
       propertyPath: panel
