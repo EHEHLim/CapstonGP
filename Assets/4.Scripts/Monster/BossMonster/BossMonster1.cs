@@ -27,6 +27,7 @@ public class BossMonster1 : BaseMonster
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         state = State.IDLE;
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = 4;
@@ -121,7 +122,10 @@ public class BossMonster1 : BaseMonster
                     if (rigid.velocity.x == 0)
                     {
                         if (isRoar)
+                        {
                             anim.SetTrigger("ROAR");
+                            audioSource.PlayOneShot(GameManager.Instance.Sound.bossRoar);
+                        }
                     }
                     else
                     {

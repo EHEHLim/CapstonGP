@@ -6,8 +6,9 @@ public abstract class BaseMonster : MonoBehaviour
 {
     protected Rigidbody2D rigid;
     protected SpriteRenderer spriteRenderer;
-    [SerializeField] protected int hp;
+    [SerializeField] public int hp;
     [SerializeField] protected float moveSpeed;
+    protected AudioSource audioSource;
 
     public State state = State.IDLE;
 
@@ -20,9 +21,16 @@ public abstract class BaseMonster : MonoBehaviour
     public void hit(int damage)
     {
         hp -= damage;
-        if(hp > 0)
+        if (hp > 0)
+        {
             GetComponent<Animator>().SetTrigger("HIT");
+        }
+        else
+        {
+            audioSource.PlayOneShot(GameManager.Instance.Sound.monsterDie);
+        }
     }
+
 
     abstract public IEnumerator CheckMonsterState();
 
