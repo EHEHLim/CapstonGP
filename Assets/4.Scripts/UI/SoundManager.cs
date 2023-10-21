@@ -7,13 +7,15 @@ public class SoundManager : MonoBehaviour
     public AudioSource btnsource;
     public AudioSource musicsource;
     private bool isMuted = false;
+    private bool isMutedEffect = false;
     private float originalVolume;
+    private float originalEffect;
 
-    private void Start()
+    private void Awake()
     {
         originalVolume = musicsource.volume;
     }
-
+ 
     public void SetMusicVolume(float volume)
     {
         musicsource.volume = volume;
@@ -43,6 +45,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
+            originalVolume = musicsource.volume;
             musicsource.volume = 0f;
             isMuted = true;
         }
@@ -50,15 +53,16 @@ public class SoundManager : MonoBehaviour
 
     public void ToggleEffect()
     {
-        if (isMuted)
+        if (isMutedEffect)
         {
-            btnsource.volume = originalVolume;
-            isMuted = false;
+            btnsource.volume = originalEffect;
+            isMutedEffect = false;
         }
         else
         {
+            originalEffect = btnsource.volume;
             btnsource.volume = 0f;
-            isMuted = true;
+            isMutedEffect = true;
         }
     }
 
