@@ -308,7 +308,7 @@ public class PlayerCtl : MonoBehaviour
         else
         {
             
-            currHp -= Random.Range(1f,11f);
+            currHp -= Random.Range(1f,10f);
             Debug.Log("hurts");
         }
 
