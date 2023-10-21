@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Canvas playerUi;
     public bool isStoryProcessing = false;
     private GameObject[] damageEffects;
+    private SfxSoundController sound;
 
     public int mapCounting = 0;
     private void Awake()
@@ -25,19 +26,22 @@ public class GameManager : MonoBehaviour
 
             DontDestroyOnLoad(this.gameObject);
 
+            sound = GetComponent<SfxSoundController>();
+            damageEffects = new GameObject[10];
+            for (int i = 0; i < damageEffects.Length; i++)
+            {
+                damageEffects[i] = Instantiate(damageEffect);
+                damageEffects[i].SetActive(false);
+                damageEffects[i].transform.SetParent(GameObject.Find("DamageEffectGroup").transform);
+            }
+
         }
         else
         {
             Destroy(this.gameObject);
         }
 
-        damageEffects = new GameObject[10];
-        for(int i = 0; i < damageEffects.Length; i++)
-        {
-            damageEffects[i] = Instantiate(damageEffect);
-            damageEffects[i].SetActive(false);
-            damageEffects[i].transform.parent = GameObject.Find("DamageEffectGroup").transform;
-        }
+        
     }
 
     public void Start()
@@ -54,6 +58,18 @@ public class GameManager : MonoBehaviour
                 return null;
             }
             return instance;
+        }
+    }
+
+    public SfxSoundController Sound
+    {
+        get
+        {
+            if(sound == null)
+            {
+                return null;
+            }
+            return sound;
         }
     }
 
@@ -86,17 +102,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ShowDamageEffect(float dmg,Transform pos)
+    public IEnumerator ShowDamageEffect(int dmg,Transform pos)
     {
-        foreach(GameObject item in damageEffects)
+        for(int i = 0; i < damageEffects.Length; i++)
         {
-            if (item.activeSelf)
+            if (damageEffects[i].activeSelf == false)
             {
-                continue;
+                damageEffects[i].GetComponent<TextMeshPro>().text = dmg.ToString();
+                damageEffects[i].transform.position = pos.position;
+                damageEffects[i].GetComponent<damageEffect>().alpha = new Color(1,1,1,1);
+                
+                damageEffects[i].SetActive(true);
+                yield return new WaitForSeconds(2f);
+                damageEffects[i].SetActive(false);
+                break;
             }
-            item.GetComponent<TextMeshPro>().text = dmg.ToString();
-            item.transform.position = pos.position;
-            item.SetActive(true);
         }
     }
 }

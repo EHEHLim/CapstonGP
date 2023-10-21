@@ -8,6 +8,7 @@ public class Anim : MonoBehaviour
     Animator anim;
     SpriteRenderer spriteRenderer;
     PlayerCtl playerctl;
+    private AudioSource audioSource;
 
     public float maxComboDelay = 0;
 
@@ -18,6 +19,7 @@ public class Anim : MonoBehaviour
         playerctl = GetComponent<PlayerCtl>();
         anim.SetBool("isJump", false);
         anim.SetBool("isRun", false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -45,6 +47,7 @@ public class Anim : MonoBehaviour
             if (playerctl.IsDash)
             {
                 anim.SetTrigger("isDash");
+                audioSource.PlayOneShot(GameManager.Instance.Sound.dash);
             }
         }
 
@@ -82,7 +85,6 @@ public class Anim : MonoBehaviour
 
         if (Input.GetButton("Horizontal"))
         {
-
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         }
     }

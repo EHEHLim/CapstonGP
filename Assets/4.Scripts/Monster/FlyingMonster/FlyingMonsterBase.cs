@@ -6,6 +6,7 @@ public abstract class FlyingMonsterBase : BaseMonster
 {
     protected void FlyingInit()
     {
+        audioSource = GetComponent<AudioSource>();
         state = State.IDLE;
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = 0;

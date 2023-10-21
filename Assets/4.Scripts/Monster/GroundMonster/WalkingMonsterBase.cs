@@ -6,6 +6,7 @@ public abstract class WalkingMonsterBase : BaseMonster
 {
     protected void WalkingInit()
     {
+        audioSource = GetComponent<AudioSource>();
         state = State.IDLE;
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = 4;

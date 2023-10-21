@@ -14,6 +14,7 @@ public class PlayerCtl : MonoBehaviour
     Collider2D coll;
     public RawImage panel;
     public CameraShakes vmCam;
+    private AudioSource audioSource;
 
     //Move Variables
     public float moveSpeed;             
@@ -58,6 +59,7 @@ public class PlayerCtl : MonoBehaviour
         tr = GetComponent<Transform>();
         coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         currHp = hp;
     }
     private void OnEnable()
@@ -237,6 +239,8 @@ public class PlayerCtl : MonoBehaviour
 
     public void DrawComboAttack(int idx)
     {
+        int i = Random.Range(0, 10);
+        audioSource.PlayOneShot(GameManager.Instance.Sound.bladeSwing[i]);
         comboAttackIndex = idx;
         pos.localPosition = poses[comboAttackIndex];
         pos.localPosition = new Vector3(pos.localPosition.x * direction,pos.localPosition.y,0);
@@ -245,15 +249,22 @@ public class PlayerCtl : MonoBehaviour
         {
             if (collider2d.tag == "Monster")
             {
-                vmCam.Attacked();
-                break;
+                if(collider2d.GetComponent<BaseMonster>().hp > 0)
+                {
+                    vmCam.Attacked();
+                    break;
+                }
             }
         }
         foreach (Collider2D collider in collider2Ds)
         {
             if (collider.gameObject.tag == "Monster")
             {
-                collider.GetComponent<BaseMonster>().hit(attackDamage);
+                if(collider.GetComponent<BaseMonster>().hp > 0)
+                {
+                    collider.GetComponent<BaseMonster>().hit(attackDamage);
+                    StartCoroutine(GameManager.Instance.ShowDamageEffect(attackDamage, collider.transform));
+                }
             }
         }
     }
@@ -308,7 +319,8 @@ public class PlayerCtl : MonoBehaviour
         else
         {
             
-            currHp -= Random.Range(1f,10f);
+            currHp -= Random.Range(-2f,2f) + damage;
+            audioSource.PlayOneShot(GameManager.Instance.Sound.playerHit);
             Debug.Log("hurts");
         }
 

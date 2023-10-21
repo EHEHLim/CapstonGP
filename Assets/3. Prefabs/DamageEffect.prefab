@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 253011414678743760}
   - component: {fileID: 253011414678743766}
   - component: {fileID: 253011414678743767}
+  - component: {fileID: -5864469926206661823}
   m_Layer: 0
   m_Name: DamageEffect
   m_TagString: Untagged
@@ -127,8 +128,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -172,3 +173,16 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 253011414678743766}
   m_maskType: 0
+--- !u!114 &-5864469926206661823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253011414678743761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64962f0ad754b4548a596217fdab6a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: {r: 0, g: 0, b: 0, a: 0}
