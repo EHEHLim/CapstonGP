@@ -7,12 +7,14 @@ using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject damageEffect;
     public GameObject[] monsters;
     private static GameManager instance = null;
     public bool isSceneChanging = false;
     public GameObject player;
     public Canvas playerUi;
     public bool isStoryProcessing = false;
+    private GameObject[] damageEffects;
 
     public int mapCounting = 0;
     private void Awake()
@@ -29,6 +31,13 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        damageEffects = new GameObject[10];
+        for(int i = 0; i < damageEffects.Length; i++)
+        {
+            damageEffects[i] = Instantiate(damageEffect);
+            damageEffects[i].SetActive(false);
+            damageEffects[i].transform.parent = GameObject.Find("DamageEffectGroup").transform;
+        }
     }
 
     public void Start()
@@ -74,6 +83,20 @@ public class GameManager : MonoBehaviour
         {
             playerUi.gameObject.SetActive(true);
 
+        }
+    }
+
+    public void ShowDamageEffect(float dmg,Transform pos)
+    {
+        foreach(GameObject item in damageEffects)
+        {
+            if (item.activeSelf)
+            {
+                continue;
+            }
+            item.GetComponent<TextMeshPro>().text = dmg.ToString();
+            item.transform.position = pos.position;
+            item.SetActive(true);
         }
     }
 }
