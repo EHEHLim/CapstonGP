@@ -10,6 +10,7 @@ TagManager:
   - GROUND
   - TGROUND
   - HP_BAR
+  - WEAPON
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Ground
   - Shooting
   - WALLS
-  - 
+  - WEAPON
   - 
   - 
   - 

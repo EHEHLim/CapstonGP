@@ -40,10 +40,16 @@ public class PlayerCtl : MonoBehaviour
     private int BOW_ATTACK = 1;
     public int attackValue = 0;
     [SerializeField] private Transform pos;
+    [SerializeField] private Transform arrowShootPoint;
     [SerializeField] private Vector2[] comboAttackBoxSizes;
     [SerializeField] private Vector2[] poses;
     public bool attacking = false;
     [SerializeField]private int comboAttackIndex = 0;
+    [SerializeField] private Vector2 arrowPoint;
+    public int arrowDamage;
+    [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private float arrowPower;
+    private GameObject[] arrowPool;
 
     //HP Variables
     public float hp;
@@ -61,6 +67,13 @@ public class PlayerCtl : MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         currHp = hp;
+        arrowPool = new GameObject[20];
+        for(int i = 0; i < arrowPool.Length; i++)
+        {
+            arrowPool[i] = Instantiate(arrowPrefab);
+            arrowPool[i].transform.parent = this.transform;
+            arrowPool[i].SetActive(false);
+        }
     }
     private void OnEnable()
     {
@@ -160,15 +173,6 @@ public class PlayerCtl : MonoBehaviour
                 case 1:
                     attackValue = COMBO_ATTACK;
                     break;
-            }
-        }
-
-        //Bow shot
-        if(attackValue == BOW_ATTACK)
-        {
-            if (Input.GetKeyUp(KeyCode.Z))
-            {
-                ArrowShoot();
             }
         }
     }
@@ -271,14 +275,29 @@ public class PlayerCtl : MonoBehaviour
 
     void ArrowShoot()
     {
-
+        for (int i = 0; i < arrowPool.Length; i++)
+        {
+            if (!arrowPool[i].activeSelf)
+            {
+                arrowPool[i].transform.parent = GameManager.Instance.transform;
+                arrowShootPoint.localPosition = arrowPoint;
+                arrowShootPoint.localPosition = new Vector3(arrowShootPoint.localPosition.x * direction, arrowShootPoint.localPosition.y,0);
+                arrowPool[i].transform.position = arrowShootPoint.position;
+                Debug.Log(arrowPool[i].GetComponent<Arrow>().arrowDamage);
+                arrowPool[i].SetActive(true);
+                arrowPool[i].GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * arrowPower, 0), ForceMode2D.Impulse);
+                break;
+            }
+        }
     }
 
     void OnDrawGizmos()
     {
         pos.localPosition = poses[comboAttackIndex];
+        arrowShootPoint.localPosition = arrowPoint;
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(pos.position, comboAttackBoxSizes[comboAttackIndex]);
+        Gizmos.DrawWireSphere(arrowShootPoint.position, 0.3f);
     }
 
 
