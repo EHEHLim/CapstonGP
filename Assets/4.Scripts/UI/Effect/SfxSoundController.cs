@@ -10,4 +10,6 @@ public class SfxSoundController : MonoBehaviour
     public AudioClip monsterDie;
     public AudioClip playerHit;
     public AudioClip playerRunning;
+    public AudioClip arrowLoading;
+    public AudioClip arrowShooting;
 }

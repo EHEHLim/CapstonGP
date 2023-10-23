@@ -44,7 +44,7 @@ public class Anim : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (playerctl.IsDash)
+            if (playerctl.canDash)
             {
                 anim.SetTrigger("isDash");
                 audioSource.PlayOneShot(GameManager.Instance.Sound.dash);
@@ -56,6 +56,10 @@ public class Anim : MonoBehaviour
             if (playerctl.isGrounded && !playerctl.IsDash)
             {
                 anim.SetBool("isAttacking", true);
+                if(playerctl.attackValue == 1)
+                {
+                    audioSource.PlayOneShot(GameManager.Instance.Sound.arrowLoading);
+                }
             }
         }
 
@@ -63,6 +67,7 @@ public class Anim : MonoBehaviour
         {
             if(playerctl.attackValue == 1)
             {
+                audioSource.PlayOneShot(GameManager.Instance.Sound.arrowShooting);
                 anim.SetTrigger("BowShoot");
             }
         }
