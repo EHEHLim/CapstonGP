@@ -42,15 +42,6 @@ public class Anim : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            if (playerctl.canDash)
-            {
-                anim.SetTrigger("isDash");
-                audioSource.PlayOneShot(GameManager.Instance.Sound.dash);
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.Z))
         {
             if (playerctl.isGrounded && !playerctl.IsDash)

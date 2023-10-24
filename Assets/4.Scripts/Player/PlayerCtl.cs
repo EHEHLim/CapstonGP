@@ -51,6 +51,14 @@ public class PlayerCtl : MonoBehaviour
     [SerializeField] private float arrowPower;
     private GameObject[] arrowPool;
 
+    public GameObject[] ArrowPool
+    {
+        get
+        {
+            return arrowPool;
+        }
+    }
+
     //HP Variables
     public float hp;
     public float currHp;
@@ -209,6 +217,8 @@ public class PlayerCtl : MonoBehaviour
     {
         canDash = false;
         isDash = true;
+        anim.SetTrigger("isDash");
+        audioSource.PlayOneShot(GameManager.Instance.Sound.dash);
         float originalGravity = rigid2D.gravityScale;
         rigid2D.gravityScale = 0f;
         rigid2D.velocity = new Vector2(direction * tr.transform.localScale.x * dashingPower, 0f);
@@ -267,7 +277,6 @@ public class PlayerCtl : MonoBehaviour
                 if(collider.GetComponent<BaseMonster>().hp > 0)
                 {
                     collider.GetComponent<BaseMonster>().hit(attackDamage);
-                    StartCoroutine(GameManager.Instance.ShowDamageEffect(attackDamage, collider.transform));
                 }
             }
         }
@@ -284,6 +293,14 @@ public class PlayerCtl : MonoBehaviour
                 arrowShootPoint.localPosition = new Vector3(arrowShootPoint.localPosition.x * direction, arrowShootPoint.localPosition.y,0);
                 arrowPool[i].transform.position = arrowShootPoint.position;
                 Debug.Log(arrowPool[i].GetComponent<Arrow>().arrowDamage);
+                if(direction == 1)
+                {
+                    arrowPool[i].GetComponent<SpriteRenderer>().flipX = false;
+                }
+                else if(direction == -1)
+                {
+                    arrowPool[i].GetComponent<SpriteRenderer>().flipX = true;
+                }
                 arrowPool[i].SetActive(true);
                 arrowPool[i].GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * arrowPower, 0), ForceMode2D.Impulse);
                 break;
