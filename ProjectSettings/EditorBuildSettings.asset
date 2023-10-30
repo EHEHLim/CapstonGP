@@ -39,6 +39,9 @@ EditorBuildSettings:
     path: Assets/1. Scenes/New Folder/Boss_S.unity
     guid: 280e6587527d58240bd21a0b132526e8
   - enabled: 1
+    path: Assets/1. Scenes/New Folder/RestPoint.unity
+    guid: e77f73fc28713419586e6f277ee75418
+  - enabled: 1
     path: Assets/1. Scenes/Last.unity
     guid: 328fdf1d441de44298da3807e0198d43
   m_configObjects: {}

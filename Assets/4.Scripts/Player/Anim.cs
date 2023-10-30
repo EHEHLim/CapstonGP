@@ -41,15 +41,22 @@ public class Anim : MonoBehaviour
         {
             return;
         }
+        if (GameManager.Instance.IsStoreOpen)
+        {
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (playerctl.isGrounded && !playerctl.IsDash)
+            if (!GameManager.Instance.IsStoreIn)
             {
-                anim.SetBool("isAttacking", true);
-                if(playerctl.attackValue == 1)
+                if (playerctl.isGrounded && !playerctl.IsDash)
                 {
-                    audioSource.PlayOneShot(GameManager.Instance.Sound.arrowLoading);
+                    anim.SetBool("isAttacking", true);
+                    if (playerctl.attackValue == 1)
+                    {
+                        audioSource.PlayOneShot(GameManager.Instance.Sound.arrowLoading);
+                    }
                 }
             }
         }

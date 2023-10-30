@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class MonsterGizmo : MonoBehaviour
 {
-    [SerializeField]private Transform[] monsterSpawnPoints;
-    
+    [SerializeField] private Transform[] monsterSpawnPoints;
 
-    private void Awake()
+    public Transform[] MonsterSpawnPoints
+    {
+        get
+        {
+            if(monsterSpawnPoints == null)
+            {
+                return null;
+            }
+            return monsterSpawnPoints;
+        }
+    }
+
+    private void OnEnable()
     {
         monsterSpawnPoints = GetComponentsInChildren<Transform>();
         foreach(var item in monsterSpawnPoints)

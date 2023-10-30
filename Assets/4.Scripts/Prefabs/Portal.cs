@@ -11,8 +11,18 @@ public class Portal : MonoBehaviour
     [SerializeField] private RawImage panel;
     private bool isportalin = false;
     private bool portalClicked = false;
+
     private void OnEnable()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 11 )
+        {
+            GameManager.Instance.RemainMonster = 0;
+        }
+        else
+        {
+            GameManager.Instance.RemainMonster = GameObject.Find("MG").GetComponent<MonsterGizmo>().MonsterSpawnPoints.Length + 1;
+        }
+
         GameManager.Instance.player.GetComponent<Transform>().position = new Vector3(x, y, 0);
         if (SceneManager.GetActiveScene().buildIndex != 2)
         {
@@ -25,6 +35,13 @@ public class Portal : MonoBehaviour
                 idx = 10;
                 break;
             }
+
+            if (GameManager.Instance.mapCounting == 3 || GameManager.Instance.mapCounting == 6)
+            {
+                idx = 11;
+                break;
+            }
+
             idx = (int)Random.Range(3, 10);
 
             if (SceneManager.GetActiveScene().buildIndex != idx)
@@ -76,7 +93,11 @@ public class Portal : MonoBehaviour
     IEnumerator SceneChange()
     {
         portalClicked = true;
-        GameManager.Instance.mapCounting++;
+        if (SceneManager.GetActiveScene().buildIndex != 11)
+        {
+            GameManager.Instance.mapCounting++;
+            GameManager.Instance.KillingPoint += GameManager.Instance.PassingMapPointAdd;
+        }
         panel.color = new Color(0, 0, 0, 0f);
         GameManager.Instance.isSceneChanging = true;
         while(panel.color.a < 1f)
@@ -84,7 +105,6 @@ public class Portal : MonoBehaviour
             panel.color += new Color(0, 0, 0, 0.03f);
             yield return new WaitForSeconds(0.01f);
         }
-        Debug.Log(GameManager.Instance.mapCounting);
         portalClicked = false;
         SceneManager.LoadScene(idx);
     }

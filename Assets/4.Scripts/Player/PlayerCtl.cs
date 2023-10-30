@@ -35,7 +35,7 @@ public class PlayerCtl : MonoBehaviour
     public Transform[] dashdusts;
 
     //Attack Variables
-    private int attackDamage = 30;
+    public float attackDamage = 30;
     private int COMBO_ATTACK = 0;
     private int BOW_ATTACK = 1;
     public int attackValue = 0;
@@ -46,7 +46,7 @@ public class PlayerCtl : MonoBehaviour
     public bool attacking = false;
     [SerializeField]private int comboAttackIndex = 0;
     [SerializeField] private Vector2 arrowPoint;
-    public int arrowDamage;
+    public float arrowDamage;
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private float arrowPower;
     private GameObject[] arrowPool;
@@ -102,6 +102,10 @@ public class PlayerCtl : MonoBehaviour
             return;
         }
         if (isDead)
+        {
+            return;
+        }
+        if (GameManager.Instance.IsStoreOpen)
         {
             return;
         }
@@ -202,6 +206,10 @@ public class PlayerCtl : MonoBehaviour
             return;
         }
         if (isDead)
+        {
+            return;
+        }
+        if (GameManager.Instance.IsStoreOpen)
         {
             return;
         }

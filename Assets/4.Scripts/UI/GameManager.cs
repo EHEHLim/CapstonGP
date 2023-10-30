@@ -7,6 +7,9 @@ using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
+    private int killingPoint = 0;
+    private int remainMonster = 0;
+    private int passingMapPointAdd = 0;
     public GameObject damageEffect;
     public GameObject[] monsters;
     private static GameManager instance = null;
@@ -16,10 +19,17 @@ public class GameManager : MonoBehaviour
     public bool isStoryProcessing = false;
     private GameObject[] damageEffects;
     private SfxSoundController sound;
-
+    [SerializeField] TextMeshProUGUI killingPointText;
+    [SerializeField] TextMeshProUGUI remainMonsterText;
+    private bool isStoreOpen = false;
+    private bool isStoreIn = false;
     public int mapCounting = 0;
     private void Awake()
     {
+
+        killingPointText.text = "killing point : " + killingPoint.ToString();
+        remainMonsterText.text = "Remain Monster : " + remainMonster.ToString();
+
         if (instance == null)
         {
             instance = this;
@@ -34,14 +44,11 @@ public class GameManager : MonoBehaviour
                 damageEffects[i].SetActive(false);
                 damageEffects[i].transform.SetParent(GameObject.Find("DamageEffectGroup").transform);
             }
-
         }
         else
         {
             Destroy(this.gameObject);
         }
-
-        
     }
 
     public void Start()
@@ -61,6 +68,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool IsStoreIn
+    {
+        get
+        {
+            return isStoreIn;
+        }
+        set
+        {
+            isStoreIn = value;
+        }
+    }
+
+    public bool IsStoreOpen
+    {
+        get
+        {
+            return isStoreOpen;
+        }
+        set
+        {
+            isStoreOpen = value;
+        }
+    }
+
     public SfxSoundController Sound
     {
         get
@@ -73,10 +104,41 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update()
+    public int KillingPoint
     {
-        
-    } 
+        get
+        {
+            return killingPoint;
+        }
+        set
+        {
+            killingPoint = value;
+        }
+    }
+
+    public int RemainMonster
+    {
+        get
+        {
+            return remainMonster;
+        }
+        set
+        {
+            remainMonster = value;
+        }
+    }
+
+    public int PassingMapPointAdd
+    {
+        get
+        {
+            return passingMapPointAdd;
+        }
+        set
+        {
+            passingMapPointAdd = value;
+        }
+    }
 
     private void LoadedSceneEvent(Scene scene, LoadSceneMode mode)
     {
@@ -102,11 +164,14 @@ public class GameManager : MonoBehaviour
         if (scene.name == "Main" || scene.name == "Last")
         {
             playerUi.gameObject.SetActive(false);
+            killingPointText.gameObject.SetActive(true);
+            remainMonsterText.gameObject.SetActive(true);
         }
         else
         {
             playerUi.gameObject.SetActive(true);
-
+            killingPointText.gameObject.SetActive(false);
+            remainMonsterText.gameObject.SetActive(false);
         }
 
     }
