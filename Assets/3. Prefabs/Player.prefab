@@ -172,6 +172,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  attackDamage: 30
   attackValue: 0
   pos: {fileID: 9083012187421210530}
   arrowShootPoint: {fileID: 966671418090320241}
@@ -190,8 +191,8 @@ MonoBehaviour:
   arrowPoint: {x: 1.7, y: 0.83}
   arrowDamage: 0
   arrowPrefab: {fileID: 0}
-  arrowPower: 500
-  hp: 1000
+  arrowPower: 50
+  hp: 150
   currHp: 0
 --- !u!95 &9083012187056578906
 Animator:

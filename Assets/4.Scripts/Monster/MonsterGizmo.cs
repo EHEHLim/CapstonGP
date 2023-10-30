@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class MonsterGizmo : MonoBehaviour
 {
-    [SerializeField]private Transform[] monsterSpawnPoints;
-    
+    [SerializeField] private Transform[] monsterSpawnPoints;
 
-    private void Awake()
+    public Transform[] MonsterSpawnPoints
     {
-        monsterSpawnPoints = GetComponentsInChildren<Transform>();
+        get
+        {
+            if(monsterSpawnPoints == null)
+            {
+                return null;
+            }
+            return monsterSpawnPoints;
+        }
+    }
+
+    private void OnEnable()
+    {
         foreach(var item in monsterSpawnPoints)
         {
             int index = Random.Range(0, GameManager.Instance.monsters.Length);

@@ -6,9 +6,10 @@ public abstract class BaseMonster : MonoBehaviour
 {
     protected Rigidbody2D rigid;
     protected SpriteRenderer spriteRenderer;
-    [SerializeField] public int hp;
+    [SerializeField] public float hp;
     [SerializeField] protected float moveSpeed;
     protected AudioSource audioSource;
+    private bool isAlreadyDead = false;
 
     public State state = State.IDLE;
 
@@ -18,7 +19,7 @@ public abstract class BaseMonster : MonoBehaviour
         DIE,
         ATTACK
     }
-    public void hit(int damage)
+    public void hit(float damage)
     {
         hp -= damage;
 
@@ -29,7 +30,13 @@ public abstract class BaseMonster : MonoBehaviour
         }
         else
         {
-            audioSource.PlayOneShot(GameManager.Instance.Sound.monsterDie);
+            if (!isAlreadyDead)
+            {
+                audioSource.PlayOneShot(GameManager.Instance.Sound.monsterDie);
+                GameManager.Instance.KillingPoint++;
+                GameManager.Instance.RemainMonster--;
+                isAlreadyDead = true;
+            }
         }
     }
 

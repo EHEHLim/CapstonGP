@@ -131,7 +131,6 @@ public class Story : MonoBehaviour
                 stopTyping = true;
             }
         }
-
         if(GameManager.Instance.isStoryProcessing == true)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))

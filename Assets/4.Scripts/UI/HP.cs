@@ -17,6 +17,5 @@ public class HP : MonoBehaviour
     void Update()
     {
         hpBar.fillAmount = GameManager.Instance.player.GetComponent<PlayerCtl>().currHp / GameManager.Instance.player.GetComponent<PlayerCtl>().hp;
-
     }
 }

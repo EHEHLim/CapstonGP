@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public int arrowDamage;
+    public float arrowDamage;
     // Start is called before the first frame update
     void Start()
     {
