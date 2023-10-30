@@ -9,9 +9,10 @@ public class Portal : MonoBehaviour
     public float x, y;
     public int idx;
     [SerializeField] private RawImage panel;
+    private bool isportalin = false;
+    private bool portalClicked = false;
     private void OnEnable()
     {
-        Debug.Log("isOn");
         GameManager.Instance.player.GetComponent<Transform>().position = new Vector3(x, y, 0);
         if (SceneManager.GetActiveScene().buildIndex != 2)
         {
@@ -35,18 +36,28 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            if (isportalin && !portalClicked)
+            {
+                StartCoroutine(SceneChange());
+            }
+        }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-            {
-                StartCoroutine(SceneChange());
-                Debug.Log("onPortal");
-            }
+            isportalin = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            isportalin = false;
         }
     }
 
@@ -64,6 +75,7 @@ public class Portal : MonoBehaviour
 
     IEnumerator SceneChange()
     {
+        portalClicked = true;
         GameManager.Instance.mapCounting++;
         panel.color = new Color(0, 0, 0, 0f);
         GameManager.Instance.isSceneChanging = true;
@@ -72,6 +84,8 @@ public class Portal : MonoBehaviour
             panel.color += new Color(0, 0, 0, 0.03f);
             yield return new WaitForSeconds(0.01f);
         }
+        Debug.Log(GameManager.Instance.mapCounting);
+        portalClicked = false;
         SceneManager.LoadScene(idx);
     }
 }

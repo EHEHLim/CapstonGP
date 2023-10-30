@@ -80,6 +80,14 @@ public class GameManager : MonoBehaviour
 
     private void LoadedSceneEvent(Scene scene, LoadSceneMode mode)
     {
+        foreach (var item in player.GetComponent<PlayerCtl>().ArrowPool)
+        {
+            item.SetActive(false);
+        }
+        foreach(var item in damageEffects)
+        {
+            item.SetActive(false);
+        }
         if (scene.name == "Main" || scene.name == "Last")
         {
             player.SetActive(false);
@@ -100,6 +108,7 @@ public class GameManager : MonoBehaviour
             playerUi.gameObject.SetActive(true);
 
         }
+
     }
 
     public IEnumerator ShowDamageEffect(int dmg,Transform pos)
