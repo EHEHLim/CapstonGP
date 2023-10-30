@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
 
-        killingPointText.text = "killing point : " + killingPoint.ToString();
-        remainMonsterText.text = "Remain Monster : " + remainMonster.ToString();
 
         if (instance == null)
         {
@@ -49,6 +47,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private void Update()
+    {
+        killingPointText.text = "killing point : " + killingPoint.ToString();
+        remainMonsterText.text = "Remain Monster : " + remainMonster.ToString();
     }
 
     public void Start()
@@ -164,25 +168,26 @@ public class GameManager : MonoBehaviour
         if (scene.name == "Main" || scene.name == "Last")
         {
             playerUi.gameObject.SetActive(false);
-            killingPointText.gameObject.SetActive(true);
-            remainMonsterText.gameObject.SetActive(true);
+            killingPointText.gameObject.SetActive(false);
+            remainMonsterText.gameObject.SetActive(false);
         }
         else
         {
             playerUi.gameObject.SetActive(true);
-            killingPointText.gameObject.SetActive(false);
-            remainMonsterText.gameObject.SetActive(false);
+
+            killingPointText.gameObject.SetActive(true);
+            remainMonsterText.gameObject.SetActive(true);
         }
 
     }
 
-    public IEnumerator ShowDamageEffect(int dmg,Transform pos)
+    public IEnumerator ShowDamageEffect(float dmg,Transform pos)
     {
         for(int i = 0; i < damageEffects.Length; i++)
         {
             if (damageEffects[i].activeSelf == false)
             {
-                damageEffects[i].GetComponent<TextMeshPro>().text = dmg.ToString();
+                damageEffects[i].GetComponent<TextMeshPro>().text = ((int)dmg).ToString();
                 damageEffects[i].transform.position = pos.position;
                 damageEffects[i].GetComponent<damageEffect>().alpha = new Color(1,1,1,1);
                 

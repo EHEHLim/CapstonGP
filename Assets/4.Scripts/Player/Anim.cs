@@ -65,7 +65,6 @@ public class Anim : MonoBehaviour
         {
             if(playerctl.attackValue == 1)
             {
-                audioSource.PlayOneShot(GameManager.Instance.Sound.arrowShooting);
                 anim.SetTrigger("BowShoot");
             }
         }

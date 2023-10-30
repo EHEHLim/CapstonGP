@@ -20,7 +20,7 @@ public class Portal : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.RemainMonster = GameObject.Find("MG").GetComponent<MonsterGizmo>().MonsterSpawnPoints.Length + 1;
+            GameManager.Instance.RemainMonster = GameObject.Find("MG").GetComponent<MonsterGizmo>().MonsterSpawnPoints.Length;
         }
 
         GameManager.Instance.player.GetComponent<Transform>().position = new Vector3(x, y, 0);

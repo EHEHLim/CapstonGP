@@ -8,12 +8,13 @@ public class StoreManager : MonoBehaviour
     public GameObject ZkeyImage;
     public RawImage storePanel;
     public GameObject[] storeSelections;
+    public TextMeshProUGUI[] selectionTexts;
     private string[] abilities;
     private Selections[] selectionButtons;
 
     // Start is called before the first frame update
 
-    private void Start()
+    private void Awake()
     {
         abilities = new string[]
         {
@@ -37,14 +38,15 @@ public class StoreManager : MonoBehaviour
     {
         storePanel.gameObject.SetActive(false);
         ZkeyImage.SetActive(false);
-        foreach(var item in storeSelections)
+        for(int i = 0; i < selectionTexts.Length; i++)
         {
-            item.GetComponent<TextMeshProUGUI>().text = "";
+            selectionTexts[i].text = "";
         }
-        for (int i = 0; i < storeSelections.Length; i++)
+
+        for (int i = 0; i < selectionTexts.Length; i++)
         {
             int idx = Random.Range(0, 4);
-            storeSelections[i].GetComponent<TextMeshProUGUI>().text = abilities[idx];
+            selectionTexts[i].text = abilities[idx];
             selectionButtons[i].abilitySelection = idx;
         }
         

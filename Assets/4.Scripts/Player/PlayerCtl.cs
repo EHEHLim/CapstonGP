@@ -46,7 +46,7 @@ public class PlayerCtl : MonoBehaviour
     public bool attacking = false;
     [SerializeField]private int comboAttackIndex = 0;
     [SerializeField] private Vector2 arrowPoint;
-    public float arrowDamage;
+    public float arrowDamage = 50;
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private float arrowPower;
     private GameObject[] arrowPool;
@@ -296,6 +296,7 @@ public class PlayerCtl : MonoBehaviour
         {
             if (!arrowPool[i].activeSelf)
             {
+                audioSource.PlayOneShot(GameManager.Instance.Sound.arrowShooting);
                 arrowPool[i].transform.parent = GameManager.Instance.transform;
                 arrowShootPoint.localPosition = arrowPoint;
                 arrowShootPoint.localPosition = new Vector3(arrowShootPoint.localPosition.x * direction, arrowShootPoint.localPosition.y,0);

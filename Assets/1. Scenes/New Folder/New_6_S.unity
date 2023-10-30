@@ -28878,7 +28878,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2542970892682631433, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: m_SortingOrder
-      value: -32768
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2611624460667711186, guid: cc440b07647b447e7976495237bed443, type: 3}
       propertyPath: x
@@ -29150,7 +29150,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1844889852
 GameObject:

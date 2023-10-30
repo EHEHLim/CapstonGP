@@ -20,7 +20,6 @@ public class MonsterGizmo : MonoBehaviour
 
     private void OnEnable()
     {
-        monsterSpawnPoints = GetComponentsInChildren<Transform>();
         foreach(var item in monsterSpawnPoints)
         {
             int index = Random.Range(0, GameManager.Instance.monsters.Length);

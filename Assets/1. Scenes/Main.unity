@@ -2993,6 +2993,8 @@ MonoBehaviour:
   player: {fileID: 1200894512}
   playerUi: {fileID: 389212515}
   isStoryProcessing: 0
+  killingPointText: {fileID: 1661729955}
+  remainMonsterText: {fileID: 1299675683}
   mapCounting: 0
 --- !u!114 &1296594758
 MonoBehaviour:
