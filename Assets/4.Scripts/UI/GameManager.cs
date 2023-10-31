@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public IEnumerator ShowDamageEffect(float dmg,Transform pos)
+    private IEnumerator ShowDamageEffect(float dmg,Transform pos)
     {
         for(int i = 0; i < damageEffects.Length; i++)
         {
@@ -197,5 +197,10 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void ShowDamage(float dmg,Transform pos)
+    {
+        StartCoroutine(ShowDamageEffect(dmg, pos));
     }
 }

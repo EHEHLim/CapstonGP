@@ -23,7 +23,7 @@ public abstract class BaseMonster : MonoBehaviour
     {
         hp -= damage;
 
-        StartCoroutine(GameManager.Instance.ShowDamageEffect(damage, this.transform));
+        GameManager.Instance.ShowDamage(damage, this.transform);
         if (hp > 0)
         {
             GetComponent<Animator>().SetTrigger("HIT");
