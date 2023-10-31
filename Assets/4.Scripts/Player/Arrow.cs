@@ -14,7 +14,6 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     private void OnEnable()
     {
-        Invoke("Destroy", 3f);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -27,8 +26,8 @@ public class Arrow : MonoBehaviour
 
     private void Destroy()
     {
-        gameObject.SetActive(false);
         transform.parent = GameManager.Instance.player.transform;
+        this.gameObject.SetActive(false);
     }
 
 }
