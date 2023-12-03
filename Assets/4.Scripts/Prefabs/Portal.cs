@@ -14,7 +14,7 @@ public class Portal : MonoBehaviour
 
     private void OnEnable()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 11 )
+        if (SceneManager.GetActiveScene().buildIndex == 11 || SceneManager.GetActiveScene().buildIndex == 10)
         {
             GameManager.Instance.RemainMonster = 0;
         }
